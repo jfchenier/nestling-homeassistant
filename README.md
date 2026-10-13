@@ -30,14 +30,19 @@ Each child becomes a device. Add the integration once per family.
 | --- | --- |
 | Buttons | Wet diaper, Dirty diaper, Wet and dirty diaper, Dry diaper |
 | Switches | Nursing timer, Pump timer, Sleep timer: on starts, off stops and saves the entry |
+| Side switches | Nursing left, Nursing right: on nurses on that side (starts, switches side or resumes), off pauses |
 | Select | Nursing side: switches side while nursing; the side the next timer starts on |
 | Sensors | Last feed, Last diaper, Last pump, Awake since, Nursing/Pumping/Sleep started, Next medicine dose |
-| Today | Feeds, Bottle, Nursing, Sleep, Naps, Diapers, Wet diapers, Dirty diapers, Pumped |
+| Today | Feeds, Bottle, Nursing, Sleep, Day sleep, Night sleep, Naps, Diapers, Wet diapers, Dirty diapers, Pumped |
+| Per day | Daily averages over the last 7 complete days: Feeds, Bottle, Nursing, Sleep, Day sleep, Night sleep, Naps, Diapers, Wet diapers, Dirty diapers, Pumped; plus Time between feeds and Wake window |
+| Calendar | Entries: every entry, and the timers running now |
 | Binary sensors | Sleeping, Nursing, Pumping, Medicine due |
 | Event | Entry logged: every new entry, from Home Assistant or a phone |
 
 Timestamps show as "2 hours ago" on a dashboard. Last-entry sensors carry the entry's details as
-attributes. Volumes and durations follow your unit settings.
+attributes. Daily averages carry `days` (complete days counted) and `previous_period` (the same
+average over the days just before). Day and night follow the family's day hours (Settings → Day and night
+in the app). Volumes and durations follow your unit settings.
 
 Every new entry also fires a `nestling_entry_logged` event on the bus, with `child`, `type` and
 the whole `entry`.

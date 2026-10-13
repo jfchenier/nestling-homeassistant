@@ -21,6 +21,9 @@ REFRESH_DELAY: Final = 1.0
 STREAM_SILENCE: Final = 40.0
 STREAM_BACKOFF_MAX: Final = 60.0
 
+# The trend sensors are daily averages over this many days (complete days only).
+TREND_DAYS: Final = 7
+
 TIMER_KINDS: Final = ("breastfeed", "pump", "sleep")
 EVENT_TYPES: Final = ("feed", "sleep", "diaper", "pump", "growth", "health", "activity", "milestone", "note")
 

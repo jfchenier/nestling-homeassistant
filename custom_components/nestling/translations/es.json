@@ -113,6 +113,51 @@
       },
       "pumped_today": {
         "name": "Extraído hoy"
+      },
+      "day_sleep_today": {
+        "name": "Sueño de día hoy"
+      },
+      "night_sleep_today": {
+        "name": "Sueño de noche hoy"
+      },
+      "feeds_per_day": {
+        "name": "Tomas por día"
+      },
+      "bottle_per_day": {
+        "name": "Biberón por día"
+      },
+      "breastfeeding_per_day": {
+        "name": "Pecho por día"
+      },
+      "sleep_per_day": {
+        "name": "Sueño por día"
+      },
+      "day_sleep_per_day": {
+        "name": "Sueño de día por día"
+      },
+      "night_sleep_per_day": {
+        "name": "Sueño de noche por día"
+      },
+      "naps_per_day": {
+        "name": "Siestas por día"
+      },
+      "diapers_per_day": {
+        "name": "Pañales por día"
+      },
+      "wet_diapers_per_day": {
+        "name": "Pañales mojados por día"
+      },
+      "dirty_diapers_per_day": {
+        "name": "Pañales sucios por día"
+      },
+      "pumped_per_day": {
+        "name": "Extraído por día"
+      },
+      "feed_interval": {
+        "name": "Tiempo entre tomas"
+      },
+      "wake_window": {
+        "name": "Ventana de vigilia"
       }
     },
     "binary_sensor": {
@@ -152,6 +197,12 @@
       },
       "sleep_timer": {
         "name": "Temporizador de sueño"
+      },
+      "breastfeed_left": {
+        "name": "Pecho izquierdo"
+      },
+      "breastfeed_right": {
+        "name": "Pecho derecho"
       }
     },
     "select": {
@@ -181,6 +232,11 @@
             }
           }
         }
+      }
+    },
+    "calendar": {
+      "entries": {
+        "name": "Registros"
       }
     }
   },
@@ -273,6 +329,25 @@
         "breastfeed": "Pecho",
         "pump": "Extracción",
         "sleep": "Sueño"
+      }
+    },
+    "calendar_entry": {
+      "options": {
+        "feed_breast": "Pecho",
+        "feed_bottle": "Biberón",
+        "feed_combo": "Pecho y biberón",
+        "feed_solids": "Sólidos",
+        "sleep": "Sueño",
+        "diaper": "Pañal",
+        "diaper_wet": "Pañal mojado",
+        "diaper_dirty": "Pañal sucio",
+        "diaper_both": "Pañal mojado y sucio",
+        "diaper_dry": "Pañal seco",
+        "pump": "Extracción",
+        "growth": "Crecimiento",
+        "activity": "Actividad",
+        "milestone": "Hito",
+        "note": "Nota"
       }
     }
   },

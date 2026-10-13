@@ -113,6 +113,51 @@
       },
       "pumped_today": {
         "name": "Pumped today"
+      },
+      "day_sleep_today": {
+        "name": "Day sleep today"
+      },
+      "night_sleep_today": {
+        "name": "Night sleep today"
+      },
+      "feeds_per_day": {
+        "name": "Feeds per day"
+      },
+      "bottle_per_day": {
+        "name": "Bottle per day"
+      },
+      "breastfeeding_per_day": {
+        "name": "Nursing per day"
+      },
+      "sleep_per_day": {
+        "name": "Sleep per day"
+      },
+      "day_sleep_per_day": {
+        "name": "Day sleep per day"
+      },
+      "night_sleep_per_day": {
+        "name": "Night sleep per day"
+      },
+      "naps_per_day": {
+        "name": "Naps per day"
+      },
+      "diapers_per_day": {
+        "name": "Diapers per day"
+      },
+      "wet_diapers_per_day": {
+        "name": "Wet diapers per day"
+      },
+      "dirty_diapers_per_day": {
+        "name": "Dirty diapers per day"
+      },
+      "pumped_per_day": {
+        "name": "Pumped per day"
+      },
+      "feed_interval": {
+        "name": "Time between feeds"
+      },
+      "wake_window": {
+        "name": "Wake window"
       }
     },
     "binary_sensor": {
@@ -152,6 +197,12 @@
       },
       "sleep_timer": {
         "name": "Sleep timer"
+      },
+      "breastfeed_left": {
+        "name": "Nursing left"
+      },
+      "breastfeed_right": {
+        "name": "Nursing right"
       }
     },
     "select": {
@@ -181,6 +232,11 @@
             }
           }
         }
+      }
+    },
+    "calendar": {
+      "entries": {
+        "name": "Entries"
       }
     }
   },
@@ -273,6 +329,25 @@
         "breastfeed": "Nursing",
         "pump": "Pumping",
         "sleep": "Sleep"
+      }
+    },
+    "calendar_entry": {
+      "options": {
+        "feed_breast": "Nursing",
+        "feed_bottle": "Bottle",
+        "feed_combo": "Nursing and bottle",
+        "feed_solids": "Solids",
+        "sleep": "Sleep",
+        "diaper": "Diaper",
+        "diaper_wet": "Wet diaper",
+        "diaper_dirty": "Dirty diaper",
+        "diaper_both": "Wet and dirty diaper",
+        "diaper_dry": "Dry diaper",
+        "pump": "Pumping",
+        "growth": "Growth",
+        "activity": "Activity",
+        "milestone": "Milestone",
+        "note": "Note"
       }
     }
   },

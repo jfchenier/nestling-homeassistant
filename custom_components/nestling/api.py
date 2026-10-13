@@ -131,6 +131,20 @@ class NestlingClient:
         data = await self.request("GET", f"/children/{child_id}/events", params=params)
         return data["events"] if isinstance(data, dict) else data
 
+    async def events_between(self, child_id: str, start: str, end: str, max_pages: int = 10) -> list[dict[str, Any]]:
+        """Entries starting in [start, end), newest first, following the pages."""
+        found: list[dict[str, Any]] = []
+        to = end
+        for _ in range(max_pages):
+            data = await self.request("GET", f"/children/{child_id}/events", params={"from": start, "to": to, "limit": "500"})
+            found.extend(data["events"])
+            if not (to := data.get("next_to")):
+                break
+        return found
+
+    async def trends(self, child_id: str, days: int = 7) -> dict[str, Any]:
+        return await self.request("GET", f"/children/{child_id}/trends", params={"days": str(days)})
+
     # Logging ---------------------------------------------------------------------------------
 
     async def create_event(self, child_id: str, body: dict[str, Any]) -> dict[str, Any]:

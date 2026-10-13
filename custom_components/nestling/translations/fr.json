@@ -113,6 +113,51 @@
       },
       "pumped_today": {
         "name": "Lait tiré aujourd’hui"
+      },
+      "day_sleep_today": {
+        "name": "Sommeil de jour aujourd’hui"
+      },
+      "night_sleep_today": {
+        "name": "Sommeil de nuit aujourd’hui"
+      },
+      "feeds_per_day": {
+        "name": "Repas par jour"
+      },
+      "bottle_per_day": {
+        "name": "Biberon par jour"
+      },
+      "breastfeeding_per_day": {
+        "name": "Tétée par jour"
+      },
+      "sleep_per_day": {
+        "name": "Sommeil par jour"
+      },
+      "day_sleep_per_day": {
+        "name": "Sommeil de jour par jour"
+      },
+      "night_sleep_per_day": {
+        "name": "Sommeil de nuit par jour"
+      },
+      "naps_per_day": {
+        "name": "Siestes par jour"
+      },
+      "diapers_per_day": {
+        "name": "Couches par jour"
+      },
+      "wet_diapers_per_day": {
+        "name": "Couches mouillées par jour"
+      },
+      "dirty_diapers_per_day": {
+        "name": "Couches sales par jour"
+      },
+      "pumped_per_day": {
+        "name": "Lait tiré par jour"
+      },
+      "feed_interval": {
+        "name": "Temps entre les repas"
+      },
+      "wake_window": {
+        "name": "Période d’éveil"
       }
     },
     "binary_sensor": {
@@ -152,6 +197,12 @@
       },
       "sleep_timer": {
         "name": "Minuteur de sommeil"
+      },
+      "breastfeed_left": {
+        "name": "Tétée à gauche"
+      },
+      "breastfeed_right": {
+        "name": "Tétée à droite"
       }
     },
     "select": {
@@ -181,6 +232,11 @@
             }
           }
         }
+      }
+    },
+    "calendar": {
+      "entries": {
+        "name": "Entrées"
       }
     }
   },
@@ -273,6 +329,25 @@
         "breastfeed": "Tétée",
         "pump": "Tirage",
         "sleep": "Sommeil"
+      }
+    },
+    "calendar_entry": {
+      "options": {
+        "feed_breast": "Tétée",
+        "feed_bottle": "Biberon",
+        "feed_combo": "Tétée et biberon",
+        "feed_solids": "Solides",
+        "sleep": "Sommeil",
+        "diaper": "Couche",
+        "diaper_wet": "Couche mouillée",
+        "diaper_dirty": "Couche sale",
+        "diaper_both": "Couche mouillée et sale",
+        "diaper_dry": "Couche sèche",
+        "pump": "Tirage",
+        "growth": "Croissance",
+        "activity": "Activité",
+        "milestone": "Première fois",
+        "note": "Note"
       }
     }
   },

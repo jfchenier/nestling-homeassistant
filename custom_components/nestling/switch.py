@@ -1,4 +1,8 @@
-"""Timer switches: on starts the timer, off stops it and saves the entry."""
+"""Timer switches: on starts the timer, off stops it and saves the entry.
+
+Nursing also has a switch per side: on nurses on that side (starting, switching or resuming the
+timer), off pauses it.
+"""
 
 from __future__ import annotations
 
@@ -16,10 +20,16 @@ from .const import DOMAIN, TIMER_KINDS
 from .coordinator import NestlingConfigEntry, NestlingCoordinator
 from .entity import NestlingEntity, add_child_entities
 
+SIDES = ("left", "right")
+
 
 async def async_setup_entry(hass: HomeAssistant, entry: NestlingConfigEntry, async_add_entities: AddConfigEntryEntitiesCallback) -> None:
     coordinator = entry.runtime_data
-    add_child_entities(coordinator, async_add_entities, lambda c: [TimerSwitch(coordinator, c, k) for k in TIMER_KINDS])
+    add_child_entities(
+        coordinator,
+        async_add_entities,
+        lambda c: [*(TimerSwitch(coordinator, c, k) for k in TIMER_KINDS), *(NursingSideSwitch(coordinator, c, s) for s in SIDES)],
+    )
 
 
 class TimerSwitch(NestlingEntity, SwitchEntity):
@@ -72,6 +82,43 @@ class TimerSwitch(NestlingEntity, SwitchEntity):
             await self.coordinator.client.timer_action(timer["id"], "stop", {"event_id": str(uuid.uuid4())})
         except NestlingError as e:
             # 404: another phone stopped it a moment ago; the refresh shows that.
+            if e.status != 404:
+                raise HomeAssistantError(f"Nestling: {e}") from e
+        await self.coordinator.async_refresh_child(self.child_id)
+
+
+class NursingSideSwitch(NestlingEntity, SwitchEntity):
+    """On while the nursing timer runs on this side."""
+
+    def __init__(self, coordinator: NestlingCoordinator, child: dict[str, Any], side: str) -> None:
+        super().__init__(coordinator, child, f"breastfeed_{side}")
+        self.side = side
+
+    @property
+    def is_on(self) -> bool:
+        timer = self.timer("breastfeed")
+        return bool(timer and timer.get("running") and timer.get("side") == self.side)
+
+    async def async_turn_on(self, **kwargs: Any) -> None:
+        if self.is_on:
+            return
+        timer = self.timer("breastfeed")
+        try:
+            if timer is None:
+                await self.coordinator.client.start_timer(self.child_id, {"id": str(uuid.uuid4()), "kind": "breastfeed", "side": self.side})
+            else:
+                # Switching also resumes a paused timer.
+                await self.coordinator.client.timer_action(timer["id"], "switch", {"side": self.side})
+        except NestlingError as e:
+            raise HomeAssistantError(f"Nestling: {e}") from e
+        await self.coordinator.async_refresh_child(self.child_id)
+
+    async def async_turn_off(self, **kwargs: Any) -> None:
+        if not self.is_on:
+            return
+        try:
+            await self.coordinator.client.timer_action(self.timer("breastfeed")["id"], "pause")
+        except NestlingError as e:
             if e.status != 404:
                 raise HomeAssistantError(f"Nestling: {e}") from e
         await self.coordinator.async_refresh_child(self.child_id)

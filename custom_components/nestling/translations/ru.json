@@ -113,6 +113,51 @@
       },
       "pumped_today": {
         "name": "Сцежено сегодня"
+      },
+      "day_sleep_today": {
+        "name": "Дневной сон сегодня"
+      },
+      "night_sleep_today": {
+        "name": "Ночной сон сегодня"
+      },
+      "feeds_per_day": {
+        "name": "Кормлений в день"
+      },
+      "bottle_per_day": {
+        "name": "Из бутылочки в день"
+      },
+      "breastfeeding_per_day": {
+        "name": "Грудью в день"
+      },
+      "sleep_per_day": {
+        "name": "Сон в день"
+      },
+      "day_sleep_per_day": {
+        "name": "Дневной сон в день"
+      },
+      "night_sleep_per_day": {
+        "name": "Ночной сон в день"
+      },
+      "naps_per_day": {
+        "name": "Дневных снов в день"
+      },
+      "diapers_per_day": {
+        "name": "Подгузников в день"
+      },
+      "wet_diapers_per_day": {
+        "name": "Мокрых подгузников в день"
+      },
+      "dirty_diapers_per_day": {
+        "name": "Грязных подгузников в день"
+      },
+      "pumped_per_day": {
+        "name": "Сцежено в день"
+      },
+      "feed_interval": {
+        "name": "Время между кормлениями"
+      },
+      "wake_window": {
+        "name": "Время бодрствования"
       }
     },
     "binary_sensor": {
@@ -152,6 +197,12 @@
       },
       "sleep_timer": {
         "name": "Таймер сна"
+      },
+      "breastfeed_left": {
+        "name": "Левая грудь"
+      },
+      "breastfeed_right": {
+        "name": "Правая грудь"
       }
     },
     "select": {
@@ -181,6 +232,11 @@
             }
           }
         }
+      }
+    },
+    "calendar": {
+      "entries": {
+        "name": "Записи"
       }
     }
   },
@@ -273,6 +329,25 @@
         "breastfeed": "Кормление грудью",
         "pump": "Сцеживание",
         "sleep": "Сон"
+      }
+    },
+    "calendar_entry": {
+      "options": {
+        "feed_breast": "Грудью",
+        "feed_bottle": "Бутылочка",
+        "feed_combo": "Грудь и бутылочка",
+        "feed_solids": "Прикорм",
+        "sleep": "Сон",
+        "diaper": "Подгузник",
+        "diaper_wet": "Мокрый подгузник",
+        "diaper_dirty": "Грязный подгузник",
+        "diaper_both": "Мокрый и грязный подгузник",
+        "diaper_dry": "Сухой подгузник",
+        "pump": "Сцеживание",
+        "growth": "Рост",
+        "activity": "Занятие",
+        "milestone": "Достижение",
+        "note": "Заметка"
       }
     }
   },

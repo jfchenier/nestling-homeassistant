@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import asyncio
+from datetime import timedelta
 from typing import Any
 
 from homeassistant.config_entries import ConfigEntryState
@@ -10,6 +11,7 @@ from homeassistant.const import CONF_TOKEN, CONF_URL
 from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import ServiceValidationError
 from homeassistant.helpers import device_registry as dr, entity_registry as er
+from homeassistant.util import dt as dt_util
 from homeassistant.util.unit_system import US_CUSTOMARY_SYSTEM
 import pytest
 from pytest_homeassistant_custom_component.common import MockConfigEntry
@@ -158,6 +160,76 @@ async def test_timers(hass: HomeAssistant, nestling: dict[str, Any], entry: Mock
     assert hass.states.get(_entity(hass, "sensor", "awake_since", child_id)).state == "unknown"
     await hass.services.async_call(DOMAIN, "discard_timer", {"kind": "sleep"}, blocking=True)
     assert hass.states.get(sleep_switch).state == "off"
+
+
+async def test_nursing_side_switches(hass: HomeAssistant, nestling: dict[str, Any], entry: MockConfigEntry) -> None:
+    child_id = nestling["child_id"]
+    left = _entity(hass, "switch", "breastfeed_left", child_id)
+    right = _entity(hass, "switch", "breastfeed_right", child_id)
+    timer = _entity(hass, "switch", "breastfeed_timer", child_id)
+
+    async def turn(entity_id: str, on: bool) -> None:
+        await hass.services.async_call("switch", "turn_on" if on else "turn_off", {"entity_id": entity_id}, blocking=True)
+
+    def states() -> tuple[str, str, str]:
+        return hass.states.get(left).state, hass.states.get(right).state, hass.states.get(timer).state
+
+    # Left starts the timer, right switches to the other side.
+    await turn(left, True)
+    assert states() == ("on", "off", "on")
+    await turn(right, True)
+    assert states() == ("off", "on", "on")
+    # Off pauses: the timer is still there.
+    await turn(right, False)
+    assert states() == ("off", "off", "on")
+    await turn(left, False)  # already paused: nothing happens
+    # On again resumes, on the side asked for.
+    await turn(left, True)
+    assert states() == ("on", "off", "on")
+    await turn(timer, False)
+    assert states() == ("off", "off", "off")
+    feed = _events(nestling, "feed")[0]
+    assert feed["method"] == "breast" and feed["start_side"] == "left"
+
+
+async def test_trends_and_calendar(hass: HomeAssistant, nestling: dict[str, Any], entry: MockConfigEntry) -> None:
+    child_id = nestling["child_id"]
+    yesterday = (dt_util.now() - timedelta(days=1)).date().isoformat()
+    # A nap and a night's sleep yesterday, a diaper, and a nap today.
+    await hass.services.async_call(DOMAIN, "log_sleep", {"start": f"{yesterday} 00:30:00", "end": f"{yesterday} 02:30:00"}, blocking=True)
+    await hass.services.async_call(DOMAIN, "log_sleep", {"start": f"{yesterday} 12:00:00", "end": f"{yesterday} 13:00:00"}, blocking=True)
+    await hass.services.async_call(DOMAIN, "log_diaper", {"wet": True, "start": f"{yesterday} 12:00:00"}, blocking=True)
+    await hass.services.async_call(DOMAIN, "log_feed", {"method": "bottle", "amount": 90}, blocking=True)
+
+    def value(key: str) -> float:
+        return float(hass.states.get(_entity(hass, "sensor", key, child_id)).state)
+
+    # Yesterday is the one complete day with entries.
+    assert value("sleep_per_day") > 0
+    assert value("night_sleep_per_day") > 0 and value("day_sleep_per_day") > 0
+    assert value("sleep_per_day") == pytest.approx(value("night_sleep_per_day") + value("day_sleep_per_day"), abs=0.2)
+    assert value("diapers_per_day") > 0
+    state = hass.states.get(_entity(hass, "sensor", "sleep_per_day", child_id))
+    assert state.attributes["unit_of_measurement"] == "min" and state.attributes["days"] >= 1
+    assert value("bottle_today") == 90
+
+    # The calendar lists the entries and the timer running now.
+    await hass.services.async_call(DOMAIN, "start_timer", {"kind": "sleep"}, blocking=True)
+    calendar = _entity(hass, "calendar", "entries", child_id)
+    assert hass.states.get(calendar).state == "on"
+    res = await hass.services.async_call(
+        "calendar",
+        "get_events",
+        {"entity_id": calendar, "start_date_time": f"{yesterday} 00:00:00", "duration": {"hours": 48}},
+        blocking=True,
+        return_response=True,
+    )
+    events = res[calendar]["events"]
+    titles = [e["summary"] for e in events]
+    assert titles.count("Sleep") == 3  # two naps and the running timer
+    assert "Wet diaper" in titles and "Bottle · 90 mL" in titles
+    diaper = next(e for e in events if e["summary"] == "Wet diaper")
+    assert dt_util.parse_datetime(diaper["end"]) - dt_util.parse_datetime(diaper["start"]) == timedelta(minutes=15)
 
 
 async def test_live_stream_and_diaper_button(hass: HomeAssistant, nestling: dict[str, Any], entry: MockConfigEntry) -> None:

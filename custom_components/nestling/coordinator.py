@@ -22,6 +22,7 @@ from .const import (
     SIGNAL_ENTRY_LOGGED,
     STREAM_BACKOFF_MAX,
     STREAM_SILENCE,
+    TREND_DAYS,
     UPDATE_INTERVAL,
 )
 
@@ -32,10 +33,11 @@ type NestlingConfigEntry = ConfigEntry[NestlingCoordinator]
 
 @dataclass
 class NestlingData:
-    """The family and a summary (`GET /children/{id}/summary`) per child."""
+    """The family, and a summary (`GET /children/{id}/summary`) and 7-day trends per child."""
 
     family: dict[str, Any]
     summaries: dict[str, dict[str, Any]] = field(default_factory=dict)
+    trends: dict[str, dict[str, Any]] = field(default_factory=dict)
 
     @property
     def children(self) -> list[dict[str, Any]]:
@@ -59,28 +61,41 @@ class NestlingCoordinator(DataUpdateCoordinator[NestlingData]):
         try:
             family = await self.client.family(self.family_id)
             children = family.get("children", [])
-            results = await asyncio.gather(*(self.client.summary(c["id"]) for c in children))
+            results = await asyncio.gather(*(self._load_child(c["id"]) for c in children))
         except NestlingAuthError as e:
             raise ConfigEntryAuthFailed(str(e)) from e
         except NestlingError as e:
             raise UpdateFailed(str(e)) from e
-        return NestlingData(family=family, summaries={c["id"]: s for c, s in zip(children, results, strict=True)})
+        return NestlingData(
+            family=family,
+            summaries={c["id"]: r[0] for c, r in zip(children, results, strict=True)},
+            trends={c["id"]: r[1] for c, r in zip(children, results, strict=True)},
+        )
+
+    async def _load_child(self, child_id: str) -> tuple[dict[str, Any], dict[str, Any]]:
+        # Today isn't complete, so one day more gives TREND_DAYS complete days to average.
+        summary, trends = await asyncio.gather(self.client.summary(child_id), self.client.trends(child_id, TREND_DAYS + 1))
+        return summary, trends
 
     def summary(self, child_id: str) -> dict[str, Any] | None:
         return self.data.summaries.get(child_id) if self.data else None
 
+    def trends(self, child_id: str) -> dict[str, Any] | None:
+        return self.data.trends.get(child_id) if self.data else None
+
     async def async_refresh_child(self, child_id: str) -> None:
-        """Reload one child's summary now (after an action Home Assistant sent)."""
+        """Reload one child's summary and trends now (after an action Home Assistant sent)."""
         if self.data is None or child_id not in self.data.summaries:
             await self.async_request_refresh()
             return
         try:
-            summary = await self.client.summary(child_id)
+            summary, trends = await self._load_child(child_id)
         except NestlingError as e:
             _LOGGER.debug("Refreshing %s failed: %s", child_id, e)
             await self.async_request_refresh()
             return
         self.data.summaries[child_id] = summary
+        self.data.trends[child_id] = trends
         self.async_set_updated_data(self.data)
 
     @callback

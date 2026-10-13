@@ -1,4 +1,4 @@
-"""Sensors: last entries, time awake, running timers, today's totals, next medicine dose."""
+"""Sensors: last entries, time awake, running timers, today's totals, daily averages, next medicine dose."""
 
 from __future__ import annotations
 
@@ -78,10 +78,39 @@ def _medicines(s: Summary) -> dict[str, Any] | None:
     }
 
 
+def _average(key: str, scale: float = 1.0) -> Callable[[Summary], float | None]:
+    """A daily average from the trends (None until a complete day was logged)."""
+
+    def value(t: Summary) -> float | None:
+        averages = t.get("averages") or {}
+        v = averages.get(key)
+        if v is None or not averages.get("days"):
+            return None
+        return round(v / scale, 1)
+
+    return value
+
+
+def _average_attrs(key: str, scale: float = 1.0) -> Callable[[Summary], dict[str, Any] | None]:
+    def attrs(t: Summary) -> dict[str, Any] | None:
+        averages = t.get("averages") or {}
+        if not averages.get("days"):
+            return None
+        previous = (t.get("previous") or {}).get(key)
+        return {
+            "days": averages["days"],
+            "previous_period": None if previous is None else round(previous / scale, 1),
+        }
+
+    return attrs
+
+
 @dataclass(frozen=True, kw_only=True)
 class NestlingSensorDescription(SensorEntityDescription):
     value_fn: Callable[[Summary], Any]
     attrs_fn: Callable[[Summary], dict[str, Any] | None] = lambda s: None
+    # Reads the child's trends (`GET /children/{id}/trends`) instead of the summary.
+    from_trends: bool = False
 
 
 def _timestamp(
@@ -116,6 +145,43 @@ def _volume(key: str, section: str, field: str) -> NestlingSensorDescription:
     )
 
 
+def _avg_count(key: str, field: str) -> NestlingSensorDescription:
+    return NestlingSensorDescription(
+        key=key,
+        state_class=SensorStateClass.MEASUREMENT,
+        suggested_display_precision=1,
+        value_fn=_average(field),
+        attrs_fn=_average_attrs(field),
+        from_trends=True,
+    )
+
+
+def _avg_minutes(key: str, field: str) -> NestlingSensorDescription:
+    return NestlingSensorDescription(
+        key=key,
+        device_class=SensorDeviceClass.DURATION,
+        native_unit_of_measurement=UnitOfTime.MINUTES,
+        state_class=SensorStateClass.MEASUREMENT,
+        suggested_display_precision=0,
+        value_fn=_average(field, 60.0),
+        attrs_fn=_average_attrs(field, 60.0),
+        from_trends=True,
+    )
+
+
+def _avg_volume(key: str, field: str) -> NestlingSensorDescription:
+    return NestlingSensorDescription(
+        key=key,
+        # Home Assistant allows no measurement state class on volumes.
+        device_class=SensorDeviceClass.VOLUME,
+        native_unit_of_measurement=UnitOfVolume.MILLILITERS,
+        suggested_display_precision=0,
+        value_fn=_average(field),
+        attrs_fn=_average_attrs(field),
+        from_trends=True,
+    )
+
+
 SENSORS: tuple[NestlingSensorDescription, ...] = (
     _timestamp(
         "last_feed",
@@ -139,11 +205,27 @@ SENSORS: tuple[NestlingSensorDescription, ...] = (
     _volume("bottle_today", "feed", "bottle_ml"),
     _minutes("breastfeeding_today", "feed", "breast_seconds"),
     _minutes("sleep_today", "sleep", "total_seconds"),
+    _minutes("day_sleep_today", "sleep", "day_seconds"),
+    _minutes("night_sleep_today", "sleep", "night_seconds"),
     _count("naps_today", "sleep", "nap_count"),
     _count("diapers_today", "diaper", "count"),
     _count("wet_diapers_today", "diaper", "wet"),
     _count("dirty_diapers_today", "diaper", "dirty"),
     _volume("pumped_today", "pump", "total_ml"),
+    # Daily averages over the last TREND_DAYS complete days.
+    _avg_count("feeds_per_day", "feeds_per_day"),
+    _avg_volume("bottle_per_day", "bottle_ml_per_day"),
+    _avg_minutes("breastfeeding_per_day", "breast_seconds_per_day"),
+    _avg_minutes("sleep_per_day", "sleep_seconds_per_day"),
+    _avg_minutes("day_sleep_per_day", "day_sleep_seconds_per_day"),
+    _avg_minutes("night_sleep_per_day", "night_sleep_seconds_per_day"),
+    _avg_count("naps_per_day", "naps_per_day"),
+    _avg_count("diapers_per_day", "diapers_per_day"),
+    _avg_count("wet_diapers_per_day", "wet_per_day"),
+    _avg_count("dirty_diapers_per_day", "dirty_per_day"),
+    _avg_volume("pumped_per_day", "pumped_ml_per_day"),
+    _avg_minutes("feed_interval", "feed_interval_seconds"),
+    _avg_minutes("wake_window", "wake_window_seconds"),
 )
 
 
@@ -160,9 +242,15 @@ class NestlingSensor(NestlingEntity, SensorEntity):
         self.entity_description = description
 
     @property
+    def _source(self) -> Summary:
+        if self.entity_description.from_trends:
+            return self.coordinator.trends(self.child_id) or {}
+        return self.summary
+
+    @property
     def native_value(self) -> Any:
-        return self.entity_description.value_fn(self.summary)
+        return self.entity_description.value_fn(self._source)
 
     @property
     def extra_state_attributes(self) -> dict[str, Any] | None:
-        return self.entity_description.attrs_fn(self.summary)
+        return self.entity_description.attrs_fn(self._source)

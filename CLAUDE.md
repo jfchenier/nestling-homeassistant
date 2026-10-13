@@ -13,7 +13,7 @@ in code, docs or commits. Use `nestling.example.com`. The GitHub account/repo na
   connected app, `POST /families/{id}/integrations`, keeps its token and logs the session out)
   or paste a token from the app (Family → Connected apps). One config entry per family, unique id
   = family id. Reauth on 401.
-- `coordinator.py`: family + `GET /children/{id}/summary` per child; 5-minute poll plus the
+- `coordinator.py`: family + `GET /children/{id}/summary` and `/trends` (7 complete days) per child; 5-minute poll plus the
   family's SSE stream (`api.NestlingClient.stream`, 40 s silence watchdog, backoff); changes
   refresh only the child they name, debounced 1 s; new events fire `nestling_entry_logged`.
 - One device per child (identifier = child id); entity unique ids are `<child_id>_<key>` and the
