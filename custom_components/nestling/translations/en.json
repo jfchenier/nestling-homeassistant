@@ -8,7 +8,7 @@
           "url": "Server URL"
         },
         "data_description": {
-          "url": "For example https://nestling.example.com"
+          "url": "For example {example}"
         }
       },
       "method": {
@@ -281,8 +281,12 @@
       "name": "Log a feed",
       "description": "Logs a breastfeed, bottle, both, or solids.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Child",
+          "description": "The child’s device."
+        },
+        "child": {
+          "name": "Child name",
           "description": "The child's name. Not needed when you pick the child's device or there is only one child."
         },
         "method": {
@@ -339,8 +343,12 @@
       "name": "Log a sleep",
       "description": "Logs a finished sleep. Use the sleep timer for one in progress.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Child",
+          "description": "The child’s device."
+        },
+        "child": {
+          "name": "Child name",
           "description": "The child's name. Not needed when you pick the child's device or there is only one child."
         },
         "start": {
@@ -365,8 +373,12 @@
       "name": "Log a diaper",
       "description": "Logs a diaper change or a potty trip.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Child",
+          "description": "The child’s device."
+        },
+        "child": {
+          "name": "Child name",
           "description": "The child's name. Not needed when you pick the child's device or there is only one child."
         },
         "wet": {
@@ -419,8 +431,12 @@
       "name": "Log pumping",
       "description": "Logs a pumping session.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Child",
+          "description": "The child’s device."
+        },
+        "child": {
+          "name": "Child name",
           "description": "The child's name. Not needed when you pick the child's device or there is only one child."
         },
         "left_amount": {
@@ -461,8 +477,12 @@
       "name": "Log growth",
       "description": "Logs weight, length or head size.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Child",
+          "description": "The child’s device."
+        },
+        "child": {
+          "name": "Child name",
           "description": "The child's name. Not needed when you pick the child's device or there is only one child."
         },
         "weight": {
@@ -503,8 +523,12 @@
       "name": "Log health",
       "description": "Logs a medicine, temperature, vaccine, appointment or symptom.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Child",
+          "description": "The child’s device."
+        },
+        "child": {
+          "name": "Child name",
           "description": "The child's name. Not needed when you pick the child's device or there is only one child."
         },
         "kind": {
@@ -549,8 +573,12 @@
       "name": "Log an activity",
       "description": "Logs an activity such as a bath or tummy time.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Child",
+          "description": "The child’s device."
+        },
+        "child": {
+          "name": "Child name",
           "description": "The child's name. Not needed when you pick the child's device or there is only one child."
         },
         "kind": {
@@ -575,8 +603,12 @@
       "name": "Log a note",
       "description": "Logs a note.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Child",
+          "description": "The child’s device."
+        },
+        "child": {
+          "name": "Child name",
           "description": "The child's name. Not needed when you pick the child's device or there is only one child."
         },
         "note": {
@@ -593,8 +625,12 @@
       "name": "Start a timer",
       "description": "Starts a nursing, pumping or sleep timer. Does nothing if one is already running.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Child",
+          "description": "The child’s device."
+        },
+        "child": {
+          "name": "Child name",
           "description": "The child's name. Not needed when you pick the child's device or there is only one child."
         },
         "kind": {
@@ -615,8 +651,12 @@
       "name": "Switch side",
       "description": "Switches the running nursing or pumping timer to the other side, or to the side given.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Child",
+          "description": "The child’s device."
+        },
+        "child": {
+          "name": "Child name",
           "description": "The child's name. Not needed when you pick the child's device or there is only one child."
         },
         "kind": {
@@ -633,8 +673,12 @@
       "name": "Pause a timer",
       "description": "Pauses a running timer.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Child",
+          "description": "The child’s device."
+        },
+        "child": {
+          "name": "Child name",
           "description": "The child's name. Not needed when you pick the child's device or there is only one child."
         },
         "kind": {
@@ -647,8 +691,12 @@
       "name": "Resume a timer",
       "description": "Resumes a paused timer.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Child",
+          "description": "The child’s device."
+        },
+        "child": {
+          "name": "Child name",
           "description": "The child's name. Not needed when you pick the child's device or there is only one child."
         },
         "kind": {
@@ -665,8 +713,12 @@
       "name": "Adjust a timer",
       "description": "Corrects a running timer's start or times.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Child",
+          "description": "The child’s device."
+        },
+        "child": {
+          "name": "Child name",
           "description": "The child's name. Not needed when you pick the child's device or there is only one child."
         },
         "kind": {
@@ -695,8 +747,12 @@
       "name": "Stop a timer",
       "description": "Stops a timer and saves the entry.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Child",
+          "description": "The child’s device."
+        },
+        "child": {
+          "name": "Child name",
           "description": "The child's name. Not needed when you pick the child's device or there is only one child."
         },
         "kind": {
@@ -733,8 +789,12 @@
       "name": "Discard a timer",
       "description": "Stops a timer without saving anything.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Child",
+          "description": "The child’s device."
+        },
+        "child": {
+          "name": "Child name",
           "description": "The child's name. Not needed when you pick the child's device or there is only one child."
         },
         "kind": {
@@ -747,8 +807,12 @@
       "name": "Continue the last entry",
       "description": "Turns the last nursing, pumping or sleep entry back into a running timer.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Child",
+          "description": "The child’s device."
+        },
+        "child": {
+          "name": "Child name",
           "description": "The child's name. Not needed when you pick the child's device or there is only one child."
         },
         "kind": {

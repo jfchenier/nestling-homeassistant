@@ -60,6 +60,7 @@ class NestlingConfigFlow(ConfigFlow, domain=DOMAIN):
                 user_input or {CONF_URL: "https://nestling.example.com"},
             ),
             errors=errors,
+            description_placeholders={"example": "https://nestling.example.com"},
         )
 
     async def async_step_method(self, user_input: dict[str, Any] | None = None) -> ConfigFlowResult:

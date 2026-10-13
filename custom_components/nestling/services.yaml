@@ -1,8 +1,9 @@
 log_feed:
-  target:
-    device:
-      integration: nestling
   fields:
+    device_id:
+      selector:
+        device:
+          integration: nestling
     child:
       selector:
         text: {}
@@ -77,10 +78,11 @@ log_feed:
       selector:
         text: {}
 log_sleep:
-  target:
-    device:
-      integration: nestling
   fields:
+    device_id:
+      selector:
+        device:
+          integration: nestling
     child:
       selector:
         text: {}
@@ -99,10 +101,11 @@ log_sleep:
       selector:
         text: {}
 log_diaper:
-  target:
-    device:
-      integration: nestling
   fields:
+    device_id:
+      selector:
+        device:
+          integration: nestling
     child:
       selector:
         text: {}
@@ -160,10 +163,11 @@ log_diaper:
       selector:
         text: {}
 log_pump:
-  target:
-    device:
-      integration: nestling
   fields:
+    device_id:
+      selector:
+        device:
+          integration: nestling
     child:
       selector:
         text: {}
@@ -214,10 +218,11 @@ log_pump:
       selector:
         text: {}
 log_growth:
-  target:
-    device:
-      integration: nestling
   fields:
+    device_id:
+      selector:
+        device:
+          integration: nestling
     child:
       selector:
         text: {}
@@ -268,10 +273,11 @@ log_growth:
       selector:
         text: {}
 log_health:
-  target:
-    device:
-      integration: nestling
   fields:
+    device_id:
+      selector:
+        device:
+          integration: nestling
     child:
       selector:
         text: {}
@@ -323,10 +329,11 @@ log_health:
       selector:
         text: {}
 log_activity:
-  target:
-    device:
-      integration: nestling
   fields:
+    device_id:
+      selector:
+        device:
+          integration: nestling
     child:
       selector:
         text: {}
@@ -344,10 +351,11 @@ log_activity:
       selector:
         text: {}
 log_note:
-  target:
-    device:
-      integration: nestling
   fields:
+    device_id:
+      selector:
+        device:
+          integration: nestling
     child:
       selector:
         text: {}
@@ -359,10 +367,11 @@ log_note:
       selector:
         datetime: {}
 start_timer:
-  target:
-    device:
-      integration: nestling
   fields:
+    device_id:
+      selector:
+        device:
+          integration: nestling
     child:
       selector:
         text: {}
@@ -387,10 +396,11 @@ start_timer:
       selector:
         datetime: {}
 switch_side:
-  target:
-    device:
-      integration: nestling
   fields:
+    device_id:
+      selector:
+        device:
+          integration: nestling
     child:
       selector:
         text: {}
@@ -410,10 +420,11 @@ switch_side:
           - both
           translation_key: side
 pause_timer:
-  target:
-    device:
-      integration: nestling
   fields:
+    device_id:
+      selector:
+        device:
+          integration: nestling
     child:
       selector:
         text: {}
@@ -427,10 +438,11 @@ pause_timer:
           - sleep
           translation_key: timer_kind
 resume_timer:
-  target:
-    device:
-      integration: nestling
   fields:
+    device_id:
+      selector:
+        device:
+          integration: nestling
     child:
       selector:
         text: {}
@@ -452,10 +464,11 @@ resume_timer:
           - both
           translation_key: side
 adjust_timer:
-  target:
-    device:
-      integration: nestling
   fields:
+    device_id:
+      selector:
+        device:
+          integration: nestling
     child:
       selector:
         text: {}
@@ -496,10 +509,11 @@ adjust_timer:
           mode: box
           unit_of_measurement: min
 stop_timer:
-  target:
-    device:
-      integration: nestling
   fields:
+    device_id:
+      selector:
+        device:
+          integration: nestling
     child:
       selector:
         text: {}
@@ -543,10 +557,11 @@ stop_timer:
       selector:
         text: {}
 discard_timer:
-  target:
-    device:
-      integration: nestling
   fields:
+    device_id:
+      selector:
+        device:
+          integration: nestling
     child:
       selector:
         text: {}
@@ -560,10 +575,11 @@ discard_timer:
           - sleep
           translation_key: timer_kind
 continue_last:
-  target:
-    device:
-      integration: nestling
   fields:
+    device_id:
+      selector:
+        device:
+          integration: nestling
     child:
       selector:
         text: {}

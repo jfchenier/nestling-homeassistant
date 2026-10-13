@@ -8,7 +8,7 @@
           "url": "URL del servidor"
         },
         "data_description": {
-          "url": "Por ejemplo https://nestling.example.com"
+          "url": "Por ejemplo {example}"
         }
       },
       "method": {
@@ -281,8 +281,12 @@
       "name": "Registrar una toma",
       "description": "Registra pecho, biberón, ambos o sólidos.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Niño",
+          "description": "El dispositivo del niño."
+        },
+        "child": {
+          "name": "Nombre del niño",
           "description": "El nombre del niño. No hace falta si eliges el dispositivo del niño o si solo hay uno."
         },
         "method": {
@@ -339,8 +343,12 @@
       "name": "Registrar un sueño",
       "description": "Registra un sueño terminado. Usa el temporizador para uno en curso.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Niño",
+          "description": "El dispositivo del niño."
+        },
+        "child": {
+          "name": "Nombre del niño",
           "description": "El nombre del niño. No hace falta si eliges el dispositivo del niño o si solo hay uno."
         },
         "start": {
@@ -365,8 +373,12 @@
       "name": "Registrar un pañal",
       "description": "Registra un cambio de pañal o una ida al orinal.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Niño",
+          "description": "El dispositivo del niño."
+        },
+        "child": {
+          "name": "Nombre del niño",
           "description": "El nombre del niño. No hace falta si eliges el dispositivo del niño o si solo hay uno."
         },
         "wet": {
@@ -419,8 +431,12 @@
       "name": "Registrar una extracción",
       "description": "Registra una sesión de extracción.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Niño",
+          "description": "El dispositivo del niño."
+        },
+        "child": {
+          "name": "Nombre del niño",
           "description": "El nombre del niño. No hace falta si eliges el dispositivo del niño o si solo hay uno."
         },
         "left_amount": {
@@ -461,8 +477,12 @@
       "name": "Registrar crecimiento",
       "description": "Registra peso, longitud o perímetro de la cabeza.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Niño",
+          "description": "El dispositivo del niño."
+        },
+        "child": {
+          "name": "Nombre del niño",
           "description": "El nombre del niño. No hace falta si eliges el dispositivo del niño o si solo hay uno."
         },
         "weight": {
@@ -503,8 +523,12 @@
       "name": "Registrar salud",
       "description": "Registra una medicina, temperatura, vacuna, cita o síntoma.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Niño",
+          "description": "El dispositivo del niño."
+        },
+        "child": {
+          "name": "Nombre del niño",
           "description": "El nombre del niño. No hace falta si eliges el dispositivo del niño o si solo hay uno."
         },
         "kind": {
@@ -549,8 +573,12 @@
       "name": "Registrar una actividad",
       "description": "Registra una actividad como un baño o tiempo boca abajo.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Niño",
+          "description": "El dispositivo del niño."
+        },
+        "child": {
+          "name": "Nombre del niño",
           "description": "El nombre del niño. No hace falta si eliges el dispositivo del niño o si solo hay uno."
         },
         "kind": {
@@ -575,8 +603,12 @@
       "name": "Registrar una nota",
       "description": "Registra una nota.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Niño",
+          "description": "El dispositivo del niño."
+        },
+        "child": {
+          "name": "Nombre del niño",
           "description": "El nombre del niño. No hace falta si eliges el dispositivo del niño o si solo hay uno."
         },
         "note": {
@@ -593,8 +625,12 @@
       "name": "Iniciar un temporizador",
       "description": "Inicia un temporizador de pecho, extracción o sueño. No hace nada si ya hay uno en marcha.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Niño",
+          "description": "El dispositivo del niño."
+        },
+        "child": {
+          "name": "Nombre del niño",
           "description": "El nombre del niño. No hace falta si eliges el dispositivo del niño o si solo hay uno."
         },
         "kind": {
@@ -615,8 +651,12 @@
       "name": "Cambiar de lado",
       "description": "Pasa el temporizador de pecho o extracción al otro lado, o al lado indicado.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Niño",
+          "description": "El dispositivo del niño."
+        },
+        "child": {
+          "name": "Nombre del niño",
           "description": "El nombre del niño. No hace falta si eliges el dispositivo del niño o si solo hay uno."
         },
         "kind": {
@@ -633,8 +673,12 @@
       "name": "Pausar un temporizador",
       "description": "Pausa un temporizador en marcha.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Niño",
+          "description": "El dispositivo del niño."
+        },
+        "child": {
+          "name": "Nombre del niño",
           "description": "El nombre del niño. No hace falta si eliges el dispositivo del niño o si solo hay uno."
         },
         "kind": {
@@ -647,8 +691,12 @@
       "name": "Reanudar un temporizador",
       "description": "Reanuda un temporizador en pausa.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Niño",
+          "description": "El dispositivo del niño."
+        },
+        "child": {
+          "name": "Nombre del niño",
           "description": "El nombre del niño. No hace falta si eliges el dispositivo del niño o si solo hay uno."
         },
         "kind": {
@@ -665,8 +713,12 @@
       "name": "Corregir un temporizador",
       "description": "Corrige el inicio o los tiempos de un temporizador en marcha.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Niño",
+          "description": "El dispositivo del niño."
+        },
+        "child": {
+          "name": "Nombre del niño",
           "description": "El nombre del niño. No hace falta si eliges el dispositivo del niño o si solo hay uno."
         },
         "kind": {
@@ -695,8 +747,12 @@
       "name": "Detener un temporizador",
       "description": "Detiene un temporizador y guarda el registro.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Niño",
+          "description": "El dispositivo del niño."
+        },
+        "child": {
+          "name": "Nombre del niño",
           "description": "El nombre del niño. No hace falta si eliges el dispositivo del niño o si solo hay uno."
         },
         "kind": {
@@ -733,8 +789,12 @@
       "name": "Descartar un temporizador",
       "description": "Detiene un temporizador sin guardar nada.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Niño",
+          "description": "El dispositivo del niño."
+        },
+        "child": {
+          "name": "Nombre del niño",
           "description": "El nombre del niño. No hace falta si eliges el dispositivo del niño o si solo hay uno."
         },
         "kind": {
@@ -747,8 +807,12 @@
       "name": "Continuar el último registro",
       "description": "Vuelve a poner en marcha como temporizador el último pecho, extracción o sueño.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Niño",
+          "description": "El dispositivo del niño."
+        },
+        "child": {
+          "name": "Nombre del niño",
           "description": "El nombre del niño. No hace falta si eliges el dispositivo del niño o si solo hay uno."
         },
         "kind": {

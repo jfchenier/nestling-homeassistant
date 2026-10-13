@@ -8,7 +8,7 @@
           "url": "URL du serveur"
         },
         "data_description": {
-          "url": "Par exemple https://nestling.example.com"
+          "url": "Par exemple {example}"
         }
       },
       "method": {
@@ -281,8 +281,12 @@
       "name": "Noter un repas",
       "description": "Note une tétée, un biberon, les deux ou des solides.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Enfant",
+          "description": "L’appareil de l’enfant."
+        },
+        "child": {
+          "name": "Nom de l’enfant",
           "description": "Le nom de l’enfant. Inutile si vous choisissez l’appareil de l’enfant ou s’il n’y a qu’un enfant."
         },
         "method": {
@@ -339,8 +343,12 @@
       "name": "Noter un sommeil",
       "description": "Note un sommeil terminé. Utilisez le minuteur pour un sommeil en cours.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Enfant",
+          "description": "L’appareil de l’enfant."
+        },
+        "child": {
+          "name": "Nom de l’enfant",
           "description": "Le nom de l’enfant. Inutile si vous choisissez l’appareil de l’enfant ou s’il n’y a qu’un enfant."
         },
         "start": {
@@ -365,8 +373,12 @@
       "name": "Noter une couche",
       "description": "Note un changement de couche ou un passage au pot.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Enfant",
+          "description": "L’appareil de l’enfant."
+        },
+        "child": {
+          "name": "Nom de l’enfant",
           "description": "Le nom de l’enfant. Inutile si vous choisissez l’appareil de l’enfant ou s’il n’y a qu’un enfant."
         },
         "wet": {
@@ -419,8 +431,12 @@
       "name": "Noter un tirage",
       "description": "Note une séance de tirage.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Enfant",
+          "description": "L’appareil de l’enfant."
+        },
+        "child": {
+          "name": "Nom de l’enfant",
           "description": "Le nom de l’enfant. Inutile si vous choisissez l’appareil de l’enfant ou s’il n’y a qu’un enfant."
         },
         "left_amount": {
@@ -461,8 +477,12 @@
       "name": "Noter la croissance",
       "description": "Note le poids, la taille ou le tour de tête.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Enfant",
+          "description": "L’appareil de l’enfant."
+        },
+        "child": {
+          "name": "Nom de l’enfant",
           "description": "Le nom de l’enfant. Inutile si vous choisissez l’appareil de l’enfant ou s’il n’y a qu’un enfant."
         },
         "weight": {
@@ -503,8 +523,12 @@
       "name": "Noter la santé",
       "description": "Note un médicament, une température, un vaccin, un rendez-vous ou un symptôme.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Enfant",
+          "description": "L’appareil de l’enfant."
+        },
+        "child": {
+          "name": "Nom de l’enfant",
           "description": "Le nom de l’enfant. Inutile si vous choisissez l’appareil de l’enfant ou s’il n’y a qu’un enfant."
         },
         "kind": {
@@ -549,8 +573,12 @@
       "name": "Noter une activité",
       "description": "Note une activité comme un bain ou du temps sur le ventre.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Enfant",
+          "description": "L’appareil de l’enfant."
+        },
+        "child": {
+          "name": "Nom de l’enfant",
           "description": "Le nom de l’enfant. Inutile si vous choisissez l’appareil de l’enfant ou s’il n’y a qu’un enfant."
         },
         "kind": {
@@ -575,8 +603,12 @@
       "name": "Noter une note",
       "description": "Note une note.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Enfant",
+          "description": "L’appareil de l’enfant."
+        },
+        "child": {
+          "name": "Nom de l’enfant",
           "description": "Le nom de l’enfant. Inutile si vous choisissez l’appareil de l’enfant ou s’il n’y a qu’un enfant."
         },
         "note": {
@@ -593,8 +625,12 @@
       "name": "Démarrer un minuteur",
       "description": "Démarre un minuteur de tétée, de tirage ou de sommeil. Ne fait rien s’il tourne déjà.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Enfant",
+          "description": "L’appareil de l’enfant."
+        },
+        "child": {
+          "name": "Nom de l’enfant",
           "description": "Le nom de l’enfant. Inutile si vous choisissez l’appareil de l’enfant ou s’il n’y a qu’un enfant."
         },
         "kind": {
@@ -615,8 +651,12 @@
       "name": "Changer de côté",
       "description": "Passe le minuteur de tétée ou de tirage à l’autre côté, ou au côté donné.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Enfant",
+          "description": "L’appareil de l’enfant."
+        },
+        "child": {
+          "name": "Nom de l’enfant",
           "description": "Le nom de l’enfant. Inutile si vous choisissez l’appareil de l’enfant ou s’il n’y a qu’un enfant."
         },
         "kind": {
@@ -633,8 +673,12 @@
       "name": "Mettre en pause",
       "description": "Met un minuteur en pause.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Enfant",
+          "description": "L’appareil de l’enfant."
+        },
+        "child": {
+          "name": "Nom de l’enfant",
           "description": "Le nom de l’enfant. Inutile si vous choisissez l’appareil de l’enfant ou s’il n’y a qu’un enfant."
         },
         "kind": {
@@ -647,8 +691,12 @@
       "name": "Reprendre un minuteur",
       "description": "Reprend un minuteur en pause.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Enfant",
+          "description": "L’appareil de l’enfant."
+        },
+        "child": {
+          "name": "Nom de l’enfant",
           "description": "Le nom de l’enfant. Inutile si vous choisissez l’appareil de l’enfant ou s’il n’y a qu’un enfant."
         },
         "kind": {
@@ -665,8 +713,12 @@
       "name": "Corriger un minuteur",
       "description": "Corrige le début ou les temps d’un minuteur en cours.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Enfant",
+          "description": "L’appareil de l’enfant."
+        },
+        "child": {
+          "name": "Nom de l’enfant",
           "description": "Le nom de l’enfant. Inutile si vous choisissez l’appareil de l’enfant ou s’il n’y a qu’un enfant."
         },
         "kind": {
@@ -695,8 +747,12 @@
       "name": "Arrêter un minuteur",
       "description": "Arrête un minuteur et enregistre l’entrée.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Enfant",
+          "description": "L’appareil de l’enfant."
+        },
+        "child": {
+          "name": "Nom de l’enfant",
           "description": "Le nom de l’enfant. Inutile si vous choisissez l’appareil de l’enfant ou s’il n’y a qu’un enfant."
         },
         "kind": {
@@ -733,8 +789,12 @@
       "name": "Annuler un minuteur",
       "description": "Arrête un minuteur sans rien enregistrer.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Enfant",
+          "description": "L’appareil de l’enfant."
+        },
+        "child": {
+          "name": "Nom de l’enfant",
           "description": "Le nom de l’enfant. Inutile si vous choisissez l’appareil de l’enfant ou s’il n’y a qu’un enfant."
         },
         "kind": {
@@ -747,8 +807,12 @@
       "name": "Reprendre la dernière entrée",
       "description": "Refait de la dernière tétée, du dernier tirage ou du dernier sommeil un minuteur en cours.",
       "fields": {
-        "child": {
+        "device_id": {
           "name": "Enfant",
+          "description": "L’appareil de l’enfant."
+        },
+        "child": {
+          "name": "Nom de l’enfant",
           "description": "Le nom de l’enfant. Inutile si vous choisissez l’appareil de l’enfant ou s’il n’y a qu’un enfant."
         },
         "kind": {
