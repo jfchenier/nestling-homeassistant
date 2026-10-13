@@ -1,0 +1,933 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Nestling server",
+        "description": "The address of your Nestling server.",
+        "data": {
+          "url": "Server URL"
+        },
+        "data_description": {
+          "url": "For example {example}"
+        }
+      },
+      "method": {
+        "title": "Connect to {url}",
+        "menu_options": {
+          "sign_in": "Sign in as a family owner",
+          "token": "Paste a token from the app"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Reconnect to Nestling",
+        "menu_options": {
+          "sign_in": "Sign in as a family owner",
+          "token": "Paste a token from the app"
+        }
+      },
+      "sign_in": {
+        "title": "Sign in",
+        "description": "Your password is used once, to add Home Assistant to the family as a connected app. Only that app's token is kept. Entries logged from Home Assistant show “Home Assistant” as the caregiver.",
+        "data": {
+          "email": "Email",
+          "password": "Password"
+        }
+      },
+      "token": {
+        "title": "Token",
+        "description": "In the Nestling app: Family → Connected apps → Connect an app, then copy the token.",
+        "data": {
+          "token": "Token"
+        }
+      },
+      "family": {
+        "title": "Family",
+        "data": {
+          "family_id": "Family"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Can't reach a Nestling server at this address.",
+      "invalid_auth": "Wrong email, password or token.",
+      "not_owner": "This account doesn't own a family. Ask a family owner to sign in, or paste a token from the app.",
+      "no_family": "This token can't log entries for any family.",
+      "unknown": "Unexpected error."
+    },
+    "abort": {
+      "already_configured": "This family is already set up.",
+      "reauth_successful": "Reconnected.",
+      "wrong_family": "That account or token is for another family.",
+      "cannot_add_app": "Couldn't add Home Assistant to the family. Is the server up to date?"
+    }
+  },
+  "entity": {
+    "sensor": {
+      "last_feed": {
+        "name": "Last feed"
+      },
+      "last_diaper": {
+        "name": "Last diaper"
+      },
+      "last_pump": {
+        "name": "Last pump"
+      },
+      "awake_since": {
+        "name": "Awake since"
+      },
+      "breastfeed_timer_started": {
+        "name": "Nursing started"
+      },
+      "pump_timer_started": {
+        "name": "Pumping started"
+      },
+      "sleep_timer_started": {
+        "name": "Sleep started"
+      },
+      "next_medicine_dose": {
+        "name": "Next medicine dose"
+      },
+      "feeds_today": {
+        "name": "Feeds today"
+      },
+      "bottle_today": {
+        "name": "Bottle today"
+      },
+      "breastfeeding_today": {
+        "name": "Nursing today"
+      },
+      "sleep_today": {
+        "name": "Sleep today"
+      },
+      "naps_today": {
+        "name": "Naps today"
+      },
+      "diapers_today": {
+        "name": "Diapers today"
+      },
+      "wet_diapers_today": {
+        "name": "Wet diapers today"
+      },
+      "dirty_diapers_today": {
+        "name": "Dirty diapers today"
+      },
+      "pumped_today": {
+        "name": "Pumped today"
+      },
+      "day_sleep_today": {
+        "name": "Day sleep today"
+      },
+      "night_sleep_today": {
+        "name": "Night sleep today"
+      },
+      "feeds_per_day": {
+        "name": "Feeds per day"
+      },
+      "bottle_per_day": {
+        "name": "Bottle per day"
+      },
+      "breastfeeding_per_day": {
+        "name": "Nursing per day"
+      },
+      "sleep_per_day": {
+        "name": "Sleep per day"
+      },
+      "day_sleep_per_day": {
+        "name": "Day sleep per day"
+      },
+      "night_sleep_per_day": {
+        "name": "Night sleep per day"
+      },
+      "naps_per_day": {
+        "name": "Naps per day"
+      },
+      "diapers_per_day": {
+        "name": "Diapers per day"
+      },
+      "wet_diapers_per_day": {
+        "name": "Wet diapers per day"
+      },
+      "dirty_diapers_per_day": {
+        "name": "Dirty diapers per day"
+      },
+      "pumped_per_day": {
+        "name": "Pumped per day"
+      },
+      "feed_interval": {
+        "name": "Time between feeds"
+      },
+      "wake_window": {
+        "name": "Wake window"
+      }
+    },
+    "binary_sensor": {
+      "sleeping": {
+        "name": "Sleeping"
+      },
+      "nursing": {
+        "name": "Nursing"
+      },
+      "pumping": {
+        "name": "Pumping"
+      },
+      "medicine_due": {
+        "name": "Medicine due"
+      }
+    },
+    "button": {
+      "diaper_wet": {
+        "name": "Wet diaper"
+      },
+      "diaper_dirty": {
+        "name": "Dirty diaper"
+      },
+      "diaper_both": {
+        "name": "Wet and dirty diaper"
+      },
+      "diaper_dry": {
+        "name": "Dry diaper"
+      }
+    },
+    "switch": {
+      "breastfeed_timer": {
+        "name": "Nursing timer"
+      },
+      "pump_timer": {
+        "name": "Pump timer"
+      },
+      "sleep_timer": {
+        "name": "Sleep timer"
+      },
+      "breastfeed_left": {
+        "name": "Nursing left"
+      },
+      "breastfeed_right": {
+        "name": "Nursing right"
+      }
+    },
+    "select": {
+      "breastfeed_side": {
+        "name": "Nursing side",
+        "state": {
+          "left": "Left",
+          "right": "Right"
+        }
+      }
+    },
+    "event": {
+      "entry_logged": {
+        "name": "Entry logged",
+        "state_attributes": {
+          "event_type": {
+            "state": {
+              "feed": "Feed",
+              "sleep": "Sleep",
+              "diaper": "Diaper",
+              "pump": "Pump",
+              "growth": "Growth",
+              "health": "Health",
+              "activity": "Activity",
+              "milestone": "Milestone",
+              "note": "Note"
+            }
+          }
+        }
+      }
+    },
+    "calendar": {
+      "entries": {
+        "name": "Entries"
+      }
+    }
+  },
+  "selector": {
+    "feed_method": {
+      "options": {
+        "breast": "Breast",
+        "bottle": "Bottle",
+        "combo": "Breast and bottle",
+        "solids": "Solids"
+      }
+    },
+    "milk": {
+      "options": {
+        "breast_milk": "Breast milk",
+        "formula": "Formula",
+        "mixed": "Mixed"
+      }
+    },
+    "side": {
+      "options": {
+        "left": "Left",
+        "right": "Right",
+        "both": "Both"
+      }
+    },
+    "volume_unit": {
+      "options": {
+        "ml": "mL",
+        "oz": "fl oz"
+      }
+    },
+    "weight_unit": {
+      "options": {
+        "g": "g",
+        "kg": "kg",
+        "lb": "lb",
+        "oz": "oz"
+      }
+    },
+    "length_unit": {
+      "options": {
+        "cm": "cm",
+        "in": "in"
+      }
+    },
+    "temperature_unit": {
+      "options": {
+        "c": "°C",
+        "f": "°F"
+      }
+    },
+    "color": {
+      "options": {
+        "yellow": "Yellow",
+        "green": "Green",
+        "brown": "Brown",
+        "black": "Black",
+        "red": "Red",
+        "gray": "Gray"
+      }
+    },
+    "consistency": {
+      "options": {
+        "runny": "Runny",
+        "mushy": "Mushy",
+        "mucousy": "Mucousy",
+        "pebbles": "Pebbles",
+        "solid": "Solid"
+      }
+    },
+    "potty": {
+      "options": {
+        "sat_dry": "Sat but dry",
+        "success": "Potty",
+        "accident": "Accident"
+      }
+    },
+    "health_kind": {
+      "options": {
+        "medicine": "Medicine",
+        "temperature": "Temperature",
+        "vaccine": "Vaccine",
+        "appointment": "Appointment",
+        "symptom": "Symptom"
+      }
+    },
+    "timer_kind": {
+      "options": {
+        "breastfeed": "Nursing",
+        "pump": "Pumping",
+        "sleep": "Sleep"
+      }
+    },
+    "calendar_entry": {
+      "options": {
+        "feed_breast": "Nursing",
+        "feed_bottle": "Bottle",
+        "feed_combo": "Nursing and bottle",
+        "feed_solids": "Solids",
+        "sleep": "Sleep",
+        "diaper": "Diaper",
+        "diaper_wet": "Wet diaper",
+        "diaper_dirty": "Dirty diaper",
+        "diaper_both": "Wet and dirty diaper",
+        "diaper_dry": "Dry diaper",
+        "pump": "Pumping",
+        "growth": "Growth",
+        "activity": "Activity",
+        "milestone": "Milestone",
+        "note": "Note"
+      }
+    }
+  },
+  "services": {
+    "log_feed": {
+      "name": "Log a feed",
+      "description": "Logs a breastfeed, bottle, both, or solids.",
+      "fields": {
+        "device_id": {
+          "name": "Child",
+          "description": "The child’s device."
+        },
+        "child": {
+          "name": "Child name",
+          "description": "The child's name. Not needed when you pick the child's device or there is only one child."
+        },
+        "method": {
+          "name": "Method",
+          "description": "Breast, bottle, both, or solids."
+        },
+        "left_minutes": {
+          "name": "Left (minutes)",
+          "description": "Time on the left side."
+        },
+        "right_minutes": {
+          "name": "Right (minutes)",
+          "description": "Time on the right side."
+        },
+        "start_side": {
+          "name": "First side",
+          "description": "The side the feed started on."
+        },
+        "amount": {
+          "name": "Amount",
+          "description": "Bottle amount, in your unit system unless a volume unit is given."
+        },
+        "volume_unit": {
+          "name": "Volume unit",
+          "description": "mL or fl oz; your unit system's if left out."
+        },
+        "milk": {
+          "name": "Milk",
+          "description": "What was in the bottle."
+        },
+        "formula_name": {
+          "name": "Formula",
+          "description": "The formula's name."
+        },
+        "foods": {
+          "name": "Foods",
+          "description": "What was eaten."
+        },
+        "start": {
+          "name": "Start",
+          "description": "When it started; now if left out."
+        },
+        "end": {
+          "name": "End",
+          "description": "When it ended."
+        },
+        "note": {
+          "name": "Note",
+          "description": "A note on the entry."
+        }
+      }
+    },
+    "log_sleep": {
+      "name": "Log a sleep",
+      "description": "Logs a finished sleep. Use the sleep timer for one in progress.",
+      "fields": {
+        "device_id": {
+          "name": "Child",
+          "description": "The child’s device."
+        },
+        "child": {
+          "name": "Child name",
+          "description": "The child's name. Not needed when you pick the child's device or there is only one child."
+        },
+        "start": {
+          "name": "Start",
+          "description": "When it started; now if left out."
+        },
+        "end": {
+          "name": "End",
+          "description": "When it ended."
+        },
+        "location": {
+          "name": "Location",
+          "description": "Where, e.g. crib."
+        },
+        "note": {
+          "name": "Note",
+          "description": "A note on the entry."
+        }
+      }
+    },
+    "log_diaper": {
+      "name": "Log a diaper",
+      "description": "Logs a diaper change or a potty trip.",
+      "fields": {
+        "device_id": {
+          "name": "Child",
+          "description": "The child’s device."
+        },
+        "child": {
+          "name": "Child name",
+          "description": "The child's name. Not needed when you pick the child's device or there is only one child."
+        },
+        "wet": {
+          "name": "Wet",
+          "description": "Pee."
+        },
+        "dirty": {
+          "name": "Dirty",
+          "description": "Poo."
+        },
+        "dry": {
+          "name": "Dry",
+          "description": "Neither."
+        },
+        "rash": {
+          "name": "Rash",
+          "description": "Diaper rash."
+        },
+        "blowout": {
+          "name": "Blowout",
+          "description": "A blowout."
+        },
+        "color": {
+          "name": "Color",
+          "description": "Color of a dirty diaper."
+        },
+        "consistency": {
+          "name": "Consistency",
+          "description": "Consistency of a dirty diaper."
+        },
+        "potty": {
+          "name": "Potty",
+          "description": "A potty trip instead of a diaper change."
+        },
+        "start": {
+          "name": "Start",
+          "description": "When it started; now if left out."
+        },
+        "end": {
+          "name": "End",
+          "description": "When it ended."
+        },
+        "note": {
+          "name": "Note",
+          "description": "A note on the entry."
+        }
+      }
+    },
+    "log_pump": {
+      "name": "Log pumping",
+      "description": "Logs a pumping session.",
+      "fields": {
+        "device_id": {
+          "name": "Child",
+          "description": "The child’s device."
+        },
+        "child": {
+          "name": "Child name",
+          "description": "The child's name. Not needed when you pick the child's device or there is only one child."
+        },
+        "left_amount": {
+          "name": "Left amount",
+          "description": "Milk from the left side."
+        },
+        "right_amount": {
+          "name": "Right amount",
+          "description": "Milk from the right side."
+        },
+        "volume_unit": {
+          "name": "Volume unit",
+          "description": "mL or fl oz; your unit system's if left out."
+        },
+        "left_minutes": {
+          "name": "Left (minutes)",
+          "description": "Time on the left side."
+        },
+        "right_minutes": {
+          "name": "Right (minutes)",
+          "description": "Time on the right side."
+        },
+        "start": {
+          "name": "Start",
+          "description": "When it started; now if left out."
+        },
+        "end": {
+          "name": "End",
+          "description": "When it ended."
+        },
+        "note": {
+          "name": "Note",
+          "description": "A note on the entry."
+        }
+      }
+    },
+    "log_growth": {
+      "name": "Log growth",
+      "description": "Logs weight, length or head size.",
+      "fields": {
+        "device_id": {
+          "name": "Child",
+          "description": "The child’s device."
+        },
+        "child": {
+          "name": "Child name",
+          "description": "The child's name. Not needed when you pick the child's device or there is only one child."
+        },
+        "weight": {
+          "name": "Weight",
+          "description": "In your unit system (kg or lb) unless a weight unit is given."
+        },
+        "weight_unit": {
+          "name": "Weight unit",
+          "description": "g, kg, lb or oz."
+        },
+        "length": {
+          "name": "Length",
+          "description": "In your unit system (cm or in) unless a length unit is given."
+        },
+        "head": {
+          "name": "Head",
+          "description": "Head circumference."
+        },
+        "length_unit": {
+          "name": "Length unit",
+          "description": "cm or in, for length and head."
+        },
+        "start": {
+          "name": "Start",
+          "description": "When it started; now if left out."
+        },
+        "end": {
+          "name": "End",
+          "description": "When it ended."
+        },
+        "note": {
+          "name": "Note",
+          "description": "A note on the entry."
+        }
+      }
+    },
+    "log_health": {
+      "name": "Log health",
+      "description": "Logs a medicine, temperature, vaccine, appointment or symptom.",
+      "fields": {
+        "device_id": {
+          "name": "Child",
+          "description": "The child’s device."
+        },
+        "child": {
+          "name": "Child name",
+          "description": "The child's name. Not needed when you pick the child's device or there is only one child."
+        },
+        "kind": {
+          "name": "Kind",
+          "description": "Medicine, temperature, vaccine, appointment or symptom."
+        },
+        "name": {
+          "name": "Name",
+          "description": "Medicine, vaccine, doctor or symptom."
+        },
+        "dose": {
+          "name": "Dose",
+          "description": "How much medicine."
+        },
+        "dose_unit": {
+          "name": "Dose unit",
+          "description": "For example mL or mg."
+        },
+        "temperature": {
+          "name": "Temperature",
+          "description": "In your unit system unless a temperature unit is given."
+        },
+        "temperature_unit": {
+          "name": "Temperature unit",
+          "description": "°C or °F."
+        },
+        "start": {
+          "name": "Start",
+          "description": "When it started; now if left out."
+        },
+        "end": {
+          "name": "End",
+          "description": "When it ended."
+        },
+        "note": {
+          "name": "Note",
+          "description": "A note on the entry."
+        }
+      }
+    },
+    "log_activity": {
+      "name": "Log an activity",
+      "description": "Logs an activity such as a bath or tummy time.",
+      "fields": {
+        "device_id": {
+          "name": "Child",
+          "description": "The child’s device."
+        },
+        "child": {
+          "name": "Child name",
+          "description": "The child's name. Not needed when you pick the child's device or there is only one child."
+        },
+        "kind": {
+          "name": "Activity",
+          "description": "For example bath, tummy_time, outdoor, play, read."
+        },
+        "start": {
+          "name": "Start",
+          "description": "When it started; now if left out."
+        },
+        "end": {
+          "name": "End",
+          "description": "When it ended."
+        },
+        "note": {
+          "name": "Note",
+          "description": "A note on the entry."
+        }
+      }
+    },
+    "log_note": {
+      "name": "Log a note",
+      "description": "Logs a note.",
+      "fields": {
+        "device_id": {
+          "name": "Child",
+          "description": "The child’s device."
+        },
+        "child": {
+          "name": "Child name",
+          "description": "The child's name. Not needed when you pick the child's device or there is only one child."
+        },
+        "note": {
+          "name": "Note",
+          "description": "The note."
+        },
+        "start": {
+          "name": "Start",
+          "description": "When it started; now if left out."
+        }
+      }
+    },
+    "start_timer": {
+      "name": "Start a timer",
+      "description": "Starts a nursing, pumping or sleep timer. Does nothing if one is already running.",
+      "fields": {
+        "device_id": {
+          "name": "Child",
+          "description": "The child’s device."
+        },
+        "child": {
+          "name": "Child name",
+          "description": "The child's name. Not needed when you pick the child's device or there is only one child."
+        },
+        "kind": {
+          "name": "Timer",
+          "description": "Nursing, pumping or sleep."
+        },
+        "side": {
+          "name": "Side",
+          "description": "Left, right or both (pumping)."
+        },
+        "start": {
+          "name": "Start",
+          "description": "When it started; now if left out."
+        }
+      }
+    },
+    "switch_side": {
+      "name": "Switch side",
+      "description": "Switches the running nursing or pumping timer to the other side, or to the side given.",
+      "fields": {
+        "device_id": {
+          "name": "Child",
+          "description": "The child’s device."
+        },
+        "child": {
+          "name": "Child name",
+          "description": "The child's name. Not needed when you pick the child's device or there is only one child."
+        },
+        "kind": {
+          "name": "Timer",
+          "description": "Nursing, pumping or sleep."
+        },
+        "side": {
+          "name": "Side",
+          "description": "Left, right or both (pumping)."
+        }
+      }
+    },
+    "pause_timer": {
+      "name": "Pause a timer",
+      "description": "Pauses a running timer.",
+      "fields": {
+        "device_id": {
+          "name": "Child",
+          "description": "The child’s device."
+        },
+        "child": {
+          "name": "Child name",
+          "description": "The child's name. Not needed when you pick the child's device or there is only one child."
+        },
+        "kind": {
+          "name": "Timer",
+          "description": "Nursing, pumping or sleep."
+        }
+      }
+    },
+    "resume_timer": {
+      "name": "Resume a timer",
+      "description": "Resumes a paused timer.",
+      "fields": {
+        "device_id": {
+          "name": "Child",
+          "description": "The child’s device."
+        },
+        "child": {
+          "name": "Child name",
+          "description": "The child's name. Not needed when you pick the child's device or there is only one child."
+        },
+        "kind": {
+          "name": "Timer",
+          "description": "Nursing, pumping or sleep."
+        },
+        "side": {
+          "name": "Side",
+          "description": "Left, right or both (pumping)."
+        }
+      }
+    },
+    "adjust_timer": {
+      "name": "Adjust a timer",
+      "description": "Corrects a running timer's start or times.",
+      "fields": {
+        "device_id": {
+          "name": "Child",
+          "description": "The child’s device."
+        },
+        "child": {
+          "name": "Child name",
+          "description": "The child's name. Not needed when you pick the child's device or there is only one child."
+        },
+        "kind": {
+          "name": "Timer",
+          "description": "Nursing, pumping or sleep."
+        },
+        "start": {
+          "name": "Start",
+          "description": "When it started; now if left out."
+        },
+        "left_minutes": {
+          "name": "Left (minutes)",
+          "description": "Time on the left side."
+        },
+        "right_minutes": {
+          "name": "Right (minutes)",
+          "description": "Time on the right side."
+        },
+        "minutes": {
+          "name": "Minutes",
+          "description": "Total time (sleep and pumping)."
+        }
+      }
+    },
+    "stop_timer": {
+      "name": "Stop a timer",
+      "description": "Stops a timer and saves the entry.",
+      "fields": {
+        "device_id": {
+          "name": "Child",
+          "description": "The child’s device."
+        },
+        "child": {
+          "name": "Child name",
+          "description": "The child's name. Not needed when you pick the child's device or there is only one child."
+        },
+        "kind": {
+          "name": "Timer",
+          "description": "Nursing, pumping or sleep."
+        },
+        "end": {
+          "name": "End",
+          "description": "When it ended."
+        },
+        "note": {
+          "name": "Note",
+          "description": "A note on the entry."
+        },
+        "left_amount": {
+          "name": "Left amount",
+          "description": "Milk from the left side."
+        },
+        "right_amount": {
+          "name": "Right amount",
+          "description": "Milk from the right side."
+        },
+        "volume_unit": {
+          "name": "Volume unit",
+          "description": "mL or fl oz; your unit system's if left out."
+        },
+        "location": {
+          "name": "Location",
+          "description": "Where, e.g. crib."
+        }
+      }
+    },
+    "discard_timer": {
+      "name": "Discard a timer",
+      "description": "Stops a timer without saving anything.",
+      "fields": {
+        "device_id": {
+          "name": "Child",
+          "description": "The child’s device."
+        },
+        "child": {
+          "name": "Child name",
+          "description": "The child's name. Not needed when you pick the child's device or there is only one child."
+        },
+        "kind": {
+          "name": "Timer",
+          "description": "Nursing, pumping or sleep."
+        }
+      }
+    },
+    "continue_last": {
+      "name": "Continue the last entry",
+      "description": "Turns the last nursing, pumping or sleep entry back into a running timer.",
+      "fields": {
+        "device_id": {
+          "name": "Child",
+          "description": "The child’s device."
+        },
+        "child": {
+          "name": "Child name",
+          "description": "The child's name. Not needed when you pick the child's device or there is only one child."
+        },
+        "kind": {
+          "name": "Timer",
+          "description": "Nursing, pumping or sleep."
+        },
+        "side": {
+          "name": "Side",
+          "description": "Left, right or both (pumping)."
+        }
+      }
+    }
+  },
+  "exceptions": {
+    "one_child": {
+      "message": "Pick one child."
+    },
+    "which_child": {
+      "message": "There are several children: pick one."
+    },
+    "no_child": {
+      "message": "No such child."
+    },
+    "bad_time": {
+      "message": "Not a time: {value}"
+    },
+    "no_timer": {
+      "message": "No {kind} timer is running."
+    },
+    "already_stopped": {
+      "message": "The timer was already stopped."
+    },
+    "diaper_empty": {
+      "message": "A diaper must be wet, dirty or dry."
+    },
+    "growth_empty": {
+      "message": "Give a weight, length or head size."
+    },
+    "nothing_to_continue": {
+      "message": "There is no entry to continue."
+    }
+  }
+}

@@ -1,0 +1,933 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Servidor Nestling",
+        "description": "La dirección de tu servidor Nestling.",
+        "data": {
+          "url": "URL del servidor"
+        },
+        "data_description": {
+          "url": "Por ejemplo {example}"
+        }
+      },
+      "method": {
+        "title": "Conectar con {url}",
+        "menu_options": {
+          "sign_in": "Iniciar sesión como propietario de la familia",
+          "token": "Pegar un token de la aplicación"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Volver a conectar Nestling",
+        "menu_options": {
+          "sign_in": "Iniciar sesión como propietario de la familia",
+          "token": "Pegar un token de la aplicación"
+        }
+      },
+      "sign_in": {
+        "title": "Iniciar sesión",
+        "description": "Tu contraseña se usa una sola vez, para añadir Home Assistant a la familia como aplicación conectada. Solo se guarda el token de esa aplicación. Lo que se registre desde Home Assistant aparecerá con el nombre «Home Assistant».",
+        "data": {
+          "email": "Correo",
+          "password": "Contraseña"
+        }
+      },
+      "token": {
+        "title": "Token",
+        "description": "En la aplicación Nestling: Familia → Aplicaciones conectadas → Conectar una aplicación, y copia el token.",
+        "data": {
+          "token": "Token"
+        }
+      },
+      "family": {
+        "title": "Familia",
+        "data": {
+          "family_id": "Familia"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "No hay un servidor Nestling accesible en esta dirección.",
+      "invalid_auth": "Correo, contraseña o token incorrectos.",
+      "not_owner": "Esta cuenta no es propietaria de ninguna familia. Pide a un propietario que inicie sesión, o pega un token de la aplicación.",
+      "no_family": "Este token no puede registrar nada en ninguna familia.",
+      "unknown": "Error inesperado."
+    },
+    "abort": {
+      "already_configured": "Esta familia ya está configurada.",
+      "reauth_successful": "Conectado de nuevo.",
+      "wrong_family": "Esa cuenta o ese token son de otra familia.",
+      "cannot_add_app": "No se pudo añadir Home Assistant a la familia. ¿Está el servidor actualizado?"
+    }
+  },
+  "entity": {
+    "sensor": {
+      "last_feed": {
+        "name": "Última toma"
+      },
+      "last_diaper": {
+        "name": "Último pañal"
+      },
+      "last_pump": {
+        "name": "Última extracción"
+      },
+      "awake_since": {
+        "name": "Despierto desde"
+      },
+      "breastfeed_timer_started": {
+        "name": "Inicio del pecho"
+      },
+      "pump_timer_started": {
+        "name": "Inicio de la extracción"
+      },
+      "sleep_timer_started": {
+        "name": "Inicio del sueño"
+      },
+      "next_medicine_dose": {
+        "name": "Próxima dosis"
+      },
+      "feeds_today": {
+        "name": "Tomas hoy"
+      },
+      "bottle_today": {
+        "name": "Biberón hoy"
+      },
+      "breastfeeding_today": {
+        "name": "Pecho hoy"
+      },
+      "sleep_today": {
+        "name": "Sueño hoy"
+      },
+      "naps_today": {
+        "name": "Siestas hoy"
+      },
+      "diapers_today": {
+        "name": "Pañales hoy"
+      },
+      "wet_diapers_today": {
+        "name": "Pañales mojados hoy"
+      },
+      "dirty_diapers_today": {
+        "name": "Pañales sucios hoy"
+      },
+      "pumped_today": {
+        "name": "Extraído hoy"
+      },
+      "day_sleep_today": {
+        "name": "Sueño de día hoy"
+      },
+      "night_sleep_today": {
+        "name": "Sueño de noche hoy"
+      },
+      "feeds_per_day": {
+        "name": "Tomas por día"
+      },
+      "bottle_per_day": {
+        "name": "Biberón por día"
+      },
+      "breastfeeding_per_day": {
+        "name": "Pecho por día"
+      },
+      "sleep_per_day": {
+        "name": "Sueño por día"
+      },
+      "day_sleep_per_day": {
+        "name": "Sueño de día por día"
+      },
+      "night_sleep_per_day": {
+        "name": "Sueño de noche por día"
+      },
+      "naps_per_day": {
+        "name": "Siestas por día"
+      },
+      "diapers_per_day": {
+        "name": "Pañales por día"
+      },
+      "wet_diapers_per_day": {
+        "name": "Pañales mojados por día"
+      },
+      "dirty_diapers_per_day": {
+        "name": "Pañales sucios por día"
+      },
+      "pumped_per_day": {
+        "name": "Extraído por día"
+      },
+      "feed_interval": {
+        "name": "Tiempo entre tomas"
+      },
+      "wake_window": {
+        "name": "Ventana de vigilia"
+      }
+    },
+    "binary_sensor": {
+      "sleeping": {
+        "name": "Durmiendo"
+      },
+      "nursing": {
+        "name": "Tomando pecho"
+      },
+      "pumping": {
+        "name": "Extrayendo"
+      },
+      "medicine_due": {
+        "name": "Medicina pendiente"
+      }
+    },
+    "button": {
+      "diaper_wet": {
+        "name": "Pañal mojado"
+      },
+      "diaper_dirty": {
+        "name": "Pañal sucio"
+      },
+      "diaper_both": {
+        "name": "Pañal mojado y sucio"
+      },
+      "diaper_dry": {
+        "name": "Pañal seco"
+      }
+    },
+    "switch": {
+      "breastfeed_timer": {
+        "name": "Temporizador de pecho"
+      },
+      "pump_timer": {
+        "name": "Temporizador de extracción"
+      },
+      "sleep_timer": {
+        "name": "Temporizador de sueño"
+      },
+      "breastfeed_left": {
+        "name": "Pecho izquierdo"
+      },
+      "breastfeed_right": {
+        "name": "Pecho derecho"
+      }
+    },
+    "select": {
+      "breastfeed_side": {
+        "name": "Lado del pecho",
+        "state": {
+          "left": "Izquierdo",
+          "right": "Derecho"
+        }
+      }
+    },
+    "event": {
+      "entry_logged": {
+        "name": "Registro nuevo",
+        "state_attributes": {
+          "event_type": {
+            "state": {
+              "feed": "Toma",
+              "sleep": "Sueño",
+              "diaper": "Pañal",
+              "pump": "Extracción",
+              "growth": "Crecimiento",
+              "health": "Salud",
+              "activity": "Actividad",
+              "milestone": "Hito",
+              "note": "Nota"
+            }
+          }
+        }
+      }
+    },
+    "calendar": {
+      "entries": {
+        "name": "Registros"
+      }
+    }
+  },
+  "selector": {
+    "feed_method": {
+      "options": {
+        "breast": "Pecho",
+        "bottle": "Biberón",
+        "combo": "Pecho y biberón",
+        "solids": "Sólidos"
+      }
+    },
+    "milk": {
+      "options": {
+        "breast_milk": "Leche materna",
+        "formula": "Fórmula",
+        "mixed": "Mezcla"
+      }
+    },
+    "side": {
+      "options": {
+        "left": "Izquierdo",
+        "right": "Derecho",
+        "both": "Ambos"
+      }
+    },
+    "volume_unit": {
+      "options": {
+        "ml": "mL",
+        "oz": "oz fl"
+      }
+    },
+    "weight_unit": {
+      "options": {
+        "g": "g",
+        "kg": "kg",
+        "lb": "lb",
+        "oz": "oz"
+      }
+    },
+    "length_unit": {
+      "options": {
+        "cm": "cm",
+        "in": "in"
+      }
+    },
+    "temperature_unit": {
+      "options": {
+        "c": "°C",
+        "f": "°F"
+      }
+    },
+    "color": {
+      "options": {
+        "yellow": "Amarillo",
+        "green": "Verde",
+        "brown": "Marrón",
+        "black": "Negro",
+        "red": "Rojo",
+        "gray": "Gris"
+      }
+    },
+    "consistency": {
+      "options": {
+        "runny": "Líquida",
+        "mushy": "Pastosa",
+        "mucousy": "Mucosa",
+        "pebbles": "En bolitas",
+        "solid": "Sólida"
+      }
+    },
+    "potty": {
+      "options": {
+        "sat_dry": "Sentado, nada",
+        "success": "Orinal",
+        "accident": "Accidente"
+      }
+    },
+    "health_kind": {
+      "options": {
+        "medicine": "Medicina",
+        "temperature": "Temperatura",
+        "vaccine": "Vacuna",
+        "appointment": "Cita",
+        "symptom": "Síntoma"
+      }
+    },
+    "timer_kind": {
+      "options": {
+        "breastfeed": "Pecho",
+        "pump": "Extracción",
+        "sleep": "Sueño"
+      }
+    },
+    "calendar_entry": {
+      "options": {
+        "feed_breast": "Pecho",
+        "feed_bottle": "Biberón",
+        "feed_combo": "Pecho y biberón",
+        "feed_solids": "Sólidos",
+        "sleep": "Sueño",
+        "diaper": "Pañal",
+        "diaper_wet": "Pañal mojado",
+        "diaper_dirty": "Pañal sucio",
+        "diaper_both": "Pañal mojado y sucio",
+        "diaper_dry": "Pañal seco",
+        "pump": "Extracción",
+        "growth": "Crecimiento",
+        "activity": "Actividad",
+        "milestone": "Hito",
+        "note": "Nota"
+      }
+    }
+  },
+  "services": {
+    "log_feed": {
+      "name": "Registrar una toma",
+      "description": "Registra pecho, biberón, ambos o sólidos.",
+      "fields": {
+        "device_id": {
+          "name": "Niño",
+          "description": "El dispositivo del niño."
+        },
+        "child": {
+          "name": "Nombre del niño",
+          "description": "El nombre del niño. No hace falta si eliges el dispositivo del niño o si solo hay uno."
+        },
+        "method": {
+          "name": "Tipo",
+          "description": "Pecho, biberón, ambos o sólidos."
+        },
+        "left_minutes": {
+          "name": "Izquierdo (minutos)",
+          "description": "Tiempo en el lado izquierdo."
+        },
+        "right_minutes": {
+          "name": "Derecho (minutos)",
+          "description": "Tiempo en el lado derecho."
+        },
+        "start_side": {
+          "name": "Primer lado",
+          "description": "El lado por el que empezó la toma."
+        },
+        "amount": {
+          "name": "Cantidad",
+          "description": "Cantidad del biberón, en tu sistema de unidades salvo que se dé una unidad."
+        },
+        "volume_unit": {
+          "name": "Unidad de volumen",
+          "description": "mL u oz fl; la de tu sistema si se omite."
+        },
+        "milk": {
+          "name": "Leche",
+          "description": "Qué había en el biberón."
+        },
+        "formula_name": {
+          "name": "Fórmula",
+          "description": "El nombre de la fórmula."
+        },
+        "foods": {
+          "name": "Alimentos",
+          "description": "Qué comió."
+        },
+        "start": {
+          "name": "Inicio",
+          "description": "Cuándo empezó; ahora si se omite."
+        },
+        "end": {
+          "name": "Fin",
+          "description": "Cuándo terminó."
+        },
+        "note": {
+          "name": "Nota",
+          "description": "Una nota sobre el registro."
+        }
+      }
+    },
+    "log_sleep": {
+      "name": "Registrar un sueño",
+      "description": "Registra un sueño terminado. Usa el temporizador para uno en curso.",
+      "fields": {
+        "device_id": {
+          "name": "Niño",
+          "description": "El dispositivo del niño."
+        },
+        "child": {
+          "name": "Nombre del niño",
+          "description": "El nombre del niño. No hace falta si eliges el dispositivo del niño o si solo hay uno."
+        },
+        "start": {
+          "name": "Inicio",
+          "description": "Cuándo empezó; ahora si se omite."
+        },
+        "end": {
+          "name": "Fin",
+          "description": "Cuándo terminó."
+        },
+        "location": {
+          "name": "Lugar",
+          "description": "Dónde, p. ej. cuna."
+        },
+        "note": {
+          "name": "Nota",
+          "description": "Una nota sobre el registro."
+        }
+      }
+    },
+    "log_diaper": {
+      "name": "Registrar un pañal",
+      "description": "Registra un cambio de pañal o una ida al orinal.",
+      "fields": {
+        "device_id": {
+          "name": "Niño",
+          "description": "El dispositivo del niño."
+        },
+        "child": {
+          "name": "Nombre del niño",
+          "description": "El nombre del niño. No hace falta si eliges el dispositivo del niño o si solo hay uno."
+        },
+        "wet": {
+          "name": "Mojado",
+          "description": "Pipí."
+        },
+        "dirty": {
+          "name": "Sucio",
+          "description": "Caca."
+        },
+        "dry": {
+          "name": "Seco",
+          "description": "Ninguno."
+        },
+        "rash": {
+          "name": "Irritación",
+          "description": "Dermatitis del pañal."
+        },
+        "blowout": {
+          "name": "Desbordado",
+          "description": "El pañal se desbordó."
+        },
+        "color": {
+          "name": "Color",
+          "description": "Color de un pañal sucio."
+        },
+        "consistency": {
+          "name": "Consistencia",
+          "description": "Consistencia de un pañal sucio."
+        },
+        "potty": {
+          "name": "Orinal",
+          "description": "Una ida al orinal en vez de un cambio de pañal."
+        },
+        "start": {
+          "name": "Inicio",
+          "description": "Cuándo empezó; ahora si se omite."
+        },
+        "end": {
+          "name": "Fin",
+          "description": "Cuándo terminó."
+        },
+        "note": {
+          "name": "Nota",
+          "description": "Una nota sobre el registro."
+        }
+      }
+    },
+    "log_pump": {
+      "name": "Registrar una extracción",
+      "description": "Registra una sesión de extracción.",
+      "fields": {
+        "device_id": {
+          "name": "Niño",
+          "description": "El dispositivo del niño."
+        },
+        "child": {
+          "name": "Nombre del niño",
+          "description": "El nombre del niño. No hace falta si eliges el dispositivo del niño o si solo hay uno."
+        },
+        "left_amount": {
+          "name": "Cantidad izquierda",
+          "description": "Leche del lado izquierdo."
+        },
+        "right_amount": {
+          "name": "Cantidad derecha",
+          "description": "Leche del lado derecho."
+        },
+        "volume_unit": {
+          "name": "Unidad de volumen",
+          "description": "mL u oz fl; la de tu sistema si se omite."
+        },
+        "left_minutes": {
+          "name": "Izquierdo (minutos)",
+          "description": "Tiempo en el lado izquierdo."
+        },
+        "right_minutes": {
+          "name": "Derecho (minutos)",
+          "description": "Tiempo en el lado derecho."
+        },
+        "start": {
+          "name": "Inicio",
+          "description": "Cuándo empezó; ahora si se omite."
+        },
+        "end": {
+          "name": "Fin",
+          "description": "Cuándo terminó."
+        },
+        "note": {
+          "name": "Nota",
+          "description": "Una nota sobre el registro."
+        }
+      }
+    },
+    "log_growth": {
+      "name": "Registrar crecimiento",
+      "description": "Registra peso, longitud o perímetro de la cabeza.",
+      "fields": {
+        "device_id": {
+          "name": "Niño",
+          "description": "El dispositivo del niño."
+        },
+        "child": {
+          "name": "Nombre del niño",
+          "description": "El nombre del niño. No hace falta si eliges el dispositivo del niño o si solo hay uno."
+        },
+        "weight": {
+          "name": "Peso",
+          "description": "En tu sistema de unidades (kg o lb) salvo que se dé una unidad."
+        },
+        "weight_unit": {
+          "name": "Unidad de peso",
+          "description": "g, kg, lb u oz."
+        },
+        "length": {
+          "name": "Longitud",
+          "description": "En tu sistema de unidades (cm o in) salvo que se dé una unidad."
+        },
+        "head": {
+          "name": "Cabeza",
+          "description": "Perímetro de la cabeza."
+        },
+        "length_unit": {
+          "name": "Unidad de longitud",
+          "description": "cm o in, para longitud y cabeza."
+        },
+        "start": {
+          "name": "Inicio",
+          "description": "Cuándo empezó; ahora si se omite."
+        },
+        "end": {
+          "name": "Fin",
+          "description": "Cuándo terminó."
+        },
+        "note": {
+          "name": "Nota",
+          "description": "Una nota sobre el registro."
+        }
+      }
+    },
+    "log_health": {
+      "name": "Registrar salud",
+      "description": "Registra una medicina, temperatura, vacuna, cita o síntoma.",
+      "fields": {
+        "device_id": {
+          "name": "Niño",
+          "description": "El dispositivo del niño."
+        },
+        "child": {
+          "name": "Nombre del niño",
+          "description": "El nombre del niño. No hace falta si eliges el dispositivo del niño o si solo hay uno."
+        },
+        "kind": {
+          "name": "Tipo",
+          "description": "Medicina, temperatura, vacuna, cita o síntoma."
+        },
+        "name": {
+          "name": "Nombre",
+          "description": "Medicina, vacuna, médico o síntoma."
+        },
+        "dose": {
+          "name": "Dosis",
+          "description": "Cuánta medicina."
+        },
+        "dose_unit": {
+          "name": "Unidad de dosis",
+          "description": "Por ejemplo mL o mg."
+        },
+        "temperature": {
+          "name": "Temperatura",
+          "description": "En tu sistema de unidades salvo que se dé una unidad."
+        },
+        "temperature_unit": {
+          "name": "Unidad de temperatura",
+          "description": "°C o °F."
+        },
+        "start": {
+          "name": "Inicio",
+          "description": "Cuándo empezó; ahora si se omite."
+        },
+        "end": {
+          "name": "Fin",
+          "description": "Cuándo terminó."
+        },
+        "note": {
+          "name": "Nota",
+          "description": "Una nota sobre el registro."
+        }
+      }
+    },
+    "log_activity": {
+      "name": "Registrar una actividad",
+      "description": "Registra una actividad como un baño o tiempo boca abajo.",
+      "fields": {
+        "device_id": {
+          "name": "Niño",
+          "description": "El dispositivo del niño."
+        },
+        "child": {
+          "name": "Nombre del niño",
+          "description": "El nombre del niño. No hace falta si eliges el dispositivo del niño o si solo hay uno."
+        },
+        "kind": {
+          "name": "Actividad",
+          "description": "Por ejemplo bath, tummy_time, outdoor, play, read."
+        },
+        "start": {
+          "name": "Inicio",
+          "description": "Cuándo empezó; ahora si se omite."
+        },
+        "end": {
+          "name": "Fin",
+          "description": "Cuándo terminó."
+        },
+        "note": {
+          "name": "Nota",
+          "description": "Una nota sobre el registro."
+        }
+      }
+    },
+    "log_note": {
+      "name": "Registrar una nota",
+      "description": "Registra una nota.",
+      "fields": {
+        "device_id": {
+          "name": "Niño",
+          "description": "El dispositivo del niño."
+        },
+        "child": {
+          "name": "Nombre del niño",
+          "description": "El nombre del niño. No hace falta si eliges el dispositivo del niño o si solo hay uno."
+        },
+        "note": {
+          "name": "Nota",
+          "description": "La nota."
+        },
+        "start": {
+          "name": "Inicio",
+          "description": "Cuándo empezó; ahora si se omite."
+        }
+      }
+    },
+    "start_timer": {
+      "name": "Iniciar un temporizador",
+      "description": "Inicia un temporizador de pecho, extracción o sueño. No hace nada si ya hay uno en marcha.",
+      "fields": {
+        "device_id": {
+          "name": "Niño",
+          "description": "El dispositivo del niño."
+        },
+        "child": {
+          "name": "Nombre del niño",
+          "description": "El nombre del niño. No hace falta si eliges el dispositivo del niño o si solo hay uno."
+        },
+        "kind": {
+          "name": "Temporizador",
+          "description": "Pecho, extracción o sueño."
+        },
+        "side": {
+          "name": "Lado",
+          "description": "Izquierdo, derecho o ambos (extracción)."
+        },
+        "start": {
+          "name": "Inicio",
+          "description": "Cuándo empezó; ahora si se omite."
+        }
+      }
+    },
+    "switch_side": {
+      "name": "Cambiar de lado",
+      "description": "Pasa el temporizador de pecho o extracción al otro lado, o al lado indicado.",
+      "fields": {
+        "device_id": {
+          "name": "Niño",
+          "description": "El dispositivo del niño."
+        },
+        "child": {
+          "name": "Nombre del niño",
+          "description": "El nombre del niño. No hace falta si eliges el dispositivo del niño o si solo hay uno."
+        },
+        "kind": {
+          "name": "Temporizador",
+          "description": "Pecho, extracción o sueño."
+        },
+        "side": {
+          "name": "Lado",
+          "description": "Izquierdo, derecho o ambos (extracción)."
+        }
+      }
+    },
+    "pause_timer": {
+      "name": "Pausar un temporizador",
+      "description": "Pausa un temporizador en marcha.",
+      "fields": {
+        "device_id": {
+          "name": "Niño",
+          "description": "El dispositivo del niño."
+        },
+        "child": {
+          "name": "Nombre del niño",
+          "description": "El nombre del niño. No hace falta si eliges el dispositivo del niño o si solo hay uno."
+        },
+        "kind": {
+          "name": "Temporizador",
+          "description": "Pecho, extracción o sueño."
+        }
+      }
+    },
+    "resume_timer": {
+      "name": "Reanudar un temporizador",
+      "description": "Reanuda un temporizador en pausa.",
+      "fields": {
+        "device_id": {
+          "name": "Niño",
+          "description": "El dispositivo del niño."
+        },
+        "child": {
+          "name": "Nombre del niño",
+          "description": "El nombre del niño. No hace falta si eliges el dispositivo del niño o si solo hay uno."
+        },
+        "kind": {
+          "name": "Temporizador",
+          "description": "Pecho, extracción o sueño."
+        },
+        "side": {
+          "name": "Lado",
+          "description": "Izquierdo, derecho o ambos (extracción)."
+        }
+      }
+    },
+    "adjust_timer": {
+      "name": "Corregir un temporizador",
+      "description": "Corrige el inicio o los tiempos de un temporizador en marcha.",
+      "fields": {
+        "device_id": {
+          "name": "Niño",
+          "description": "El dispositivo del niño."
+        },
+        "child": {
+          "name": "Nombre del niño",
+          "description": "El nombre del niño. No hace falta si eliges el dispositivo del niño o si solo hay uno."
+        },
+        "kind": {
+          "name": "Temporizador",
+          "description": "Pecho, extracción o sueño."
+        },
+        "start": {
+          "name": "Inicio",
+          "description": "Cuándo empezó; ahora si se omite."
+        },
+        "left_minutes": {
+          "name": "Izquierdo (minutos)",
+          "description": "Tiempo en el lado izquierdo."
+        },
+        "right_minutes": {
+          "name": "Derecho (minutos)",
+          "description": "Tiempo en el lado derecho."
+        },
+        "minutes": {
+          "name": "Minutos",
+          "description": "Tiempo total (sueño y extracción)."
+        }
+      }
+    },
+    "stop_timer": {
+      "name": "Detener un temporizador",
+      "description": "Detiene un temporizador y guarda el registro.",
+      "fields": {
+        "device_id": {
+          "name": "Niño",
+          "description": "El dispositivo del niño."
+        },
+        "child": {
+          "name": "Nombre del niño",
+          "description": "El nombre del niño. No hace falta si eliges el dispositivo del niño o si solo hay uno."
+        },
+        "kind": {
+          "name": "Temporizador",
+          "description": "Pecho, extracción o sueño."
+        },
+        "end": {
+          "name": "Fin",
+          "description": "Cuándo terminó."
+        },
+        "note": {
+          "name": "Nota",
+          "description": "Una nota sobre el registro."
+        },
+        "left_amount": {
+          "name": "Cantidad izquierda",
+          "description": "Leche del lado izquierdo."
+        },
+        "right_amount": {
+          "name": "Cantidad derecha",
+          "description": "Leche del lado derecho."
+        },
+        "volume_unit": {
+          "name": "Unidad de volumen",
+          "description": "mL u oz fl; la de tu sistema si se omite."
+        },
+        "location": {
+          "name": "Lugar",
+          "description": "Dónde, p. ej. cuna."
+        }
+      }
+    },
+    "discard_timer": {
+      "name": "Descartar un temporizador",
+      "description": "Detiene un temporizador sin guardar nada.",
+      "fields": {
+        "device_id": {
+          "name": "Niño",
+          "description": "El dispositivo del niño."
+        },
+        "child": {
+          "name": "Nombre del niño",
+          "description": "El nombre del niño. No hace falta si eliges el dispositivo del niño o si solo hay uno."
+        },
+        "kind": {
+          "name": "Temporizador",
+          "description": "Pecho, extracción o sueño."
+        }
+      }
+    },
+    "continue_last": {
+      "name": "Continuar el último registro",
+      "description": "Vuelve a poner en marcha como temporizador el último pecho, extracción o sueño.",
+      "fields": {
+        "device_id": {
+          "name": "Niño",
+          "description": "El dispositivo del niño."
+        },
+        "child": {
+          "name": "Nombre del niño",
+          "description": "El nombre del niño. No hace falta si eliges el dispositivo del niño o si solo hay uno."
+        },
+        "kind": {
+          "name": "Temporizador",
+          "description": "Pecho, extracción o sueño."
+        },
+        "side": {
+          "name": "Lado",
+          "description": "Izquierdo, derecho o ambos (extracción)."
+        }
+      }
+    }
+  },
+  "exceptions": {
+    "one_child": {
+      "message": "Elige un solo niño."
+    },
+    "which_child": {
+      "message": "Hay varios niños: elige uno."
+    },
+    "no_child": {
+      "message": "No existe ese niño."
+    },
+    "bad_time": {
+      "message": "Hora no válida: {value}"
+    },
+    "no_timer": {
+      "message": "No hay un temporizador de {kind} en marcha."
+    },
+    "already_stopped": {
+      "message": "El temporizador ya estaba detenido."
+    },
+    "diaper_empty": {
+      "message": "Un pañal debe estar mojado, sucio o seco."
+    },
+    "growth_empty": {
+      "message": "Indica un peso, una longitud o un perímetro de cabeza."
+    },
+    "nothing_to_continue": {
+      "message": "No hay ningún registro que continuar."
+    }
+  }
+}

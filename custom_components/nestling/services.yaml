@@ -1,0 +1,602 @@
+log_feed:
+  fields:
+    device_id:
+      selector:
+        device:
+          integration: nestling
+    child:
+      selector:
+        text: {}
+    method:
+      required: true
+      selector:
+        select:
+          options:
+          - breast
+          - bottle
+          - combo
+          - solids
+          translation_key: feed_method
+    left_minutes:
+      selector:
+        number:
+          min: 0
+          max: 1440
+          step: 0.5
+          mode: box
+          unit_of_measurement: min
+    right_minutes:
+      selector:
+        number:
+          min: 0
+          max: 1440
+          step: 0.5
+          mode: box
+          unit_of_measurement: min
+    start_side:
+      selector:
+        select:
+          options:
+          - left
+          - right
+          translation_key: side
+    amount:
+      selector:
+        number:
+          min: 0
+          max: 2000
+          step: 0.1
+          mode: box
+    volume_unit:
+      selector:
+        select:
+          options:
+          - ml
+          - oz
+          translation_key: volume_unit
+    milk:
+      selector:
+        select:
+          options:
+          - breast_milk
+          - formula
+          - mixed
+          translation_key: milk
+    formula_name:
+      selector:
+        text: {}
+    foods:
+      selector:
+        text: {}
+    start:
+      selector:
+        datetime: {}
+    end:
+      selector:
+        datetime: {}
+    note:
+      selector:
+        text: {}
+log_sleep:
+  fields:
+    device_id:
+      selector:
+        device:
+          integration: nestling
+    child:
+      selector:
+        text: {}
+    start:
+      required: true
+      selector:
+        datetime: {}
+    end:
+      required: true
+      selector:
+        datetime: {}
+    location:
+      selector:
+        text: {}
+    note:
+      selector:
+        text: {}
+log_diaper:
+  fields:
+    device_id:
+      selector:
+        device:
+          integration: nestling
+    child:
+      selector:
+        text: {}
+    wet:
+      selector:
+        boolean: {}
+    dirty:
+      selector:
+        boolean: {}
+    dry:
+      selector:
+        boolean: {}
+    rash:
+      selector:
+        boolean: {}
+    blowout:
+      selector:
+        boolean: {}
+    color:
+      selector:
+        select:
+          options:
+          - yellow
+          - green
+          - brown
+          - black
+          - red
+          - gray
+          translation_key: color
+    consistency:
+      selector:
+        select:
+          options:
+          - runny
+          - mushy
+          - mucousy
+          - pebbles
+          - solid
+          translation_key: consistency
+    potty:
+      selector:
+        select:
+          options:
+          - sat_dry
+          - success
+          - accident
+          translation_key: potty
+    start:
+      selector:
+        datetime: {}
+    end:
+      selector:
+        datetime: {}
+    note:
+      selector:
+        text: {}
+log_pump:
+  fields:
+    device_id:
+      selector:
+        device:
+          integration: nestling
+    child:
+      selector:
+        text: {}
+    left_amount:
+      selector:
+        number:
+          min: 0
+          max: 2000
+          step: 0.1
+          mode: box
+    right_amount:
+      selector:
+        number:
+          min: 0
+          max: 2000
+          step: 0.1
+          mode: box
+    volume_unit:
+      selector:
+        select:
+          options:
+          - ml
+          - oz
+          translation_key: volume_unit
+    left_minutes:
+      selector:
+        number:
+          min: 0
+          max: 1440
+          step: 0.5
+          mode: box
+          unit_of_measurement: min
+    right_minutes:
+      selector:
+        number:
+          min: 0
+          max: 1440
+          step: 0.5
+          mode: box
+          unit_of_measurement: min
+    start:
+      selector:
+        datetime: {}
+    end:
+      selector:
+        datetime: {}
+    note:
+      selector:
+        text: {}
+log_growth:
+  fields:
+    device_id:
+      selector:
+        device:
+          integration: nestling
+    child:
+      selector:
+        text: {}
+    weight:
+      selector:
+        number:
+          min: 0
+          max: 50
+          step: 0.01
+          mode: box
+    weight_unit:
+      selector:
+        select:
+          options:
+          - g
+          - kg
+          - lb
+          - oz
+          translation_key: weight_unit
+    length:
+      selector:
+        number:
+          min: 0
+          max: 150
+          step: 0.1
+          mode: box
+    head:
+      selector:
+        number:
+          min: 0
+          max: 80
+          step: 0.1
+          mode: box
+    length_unit:
+      selector:
+        select:
+          options:
+          - cm
+          - in
+          translation_key: length_unit
+    start:
+      selector:
+        datetime: {}
+    end:
+      selector:
+        datetime: {}
+    note:
+      selector:
+        text: {}
+log_health:
+  fields:
+    device_id:
+      selector:
+        device:
+          integration: nestling
+    child:
+      selector:
+        text: {}
+    kind:
+      required: true
+      selector:
+        select:
+          options:
+          - medicine
+          - temperature
+          - vaccine
+          - appointment
+          - symptom
+          translation_key: health_kind
+    name:
+      selector:
+        text: {}
+    dose:
+      selector:
+        number:
+          min: 0
+          max: 1000
+          step: 0.1
+          mode: box
+    dose_unit:
+      selector:
+        text: {}
+    temperature:
+      selector:
+        number:
+          min: 30
+          max: 110
+          step: 0.1
+          mode: box
+    temperature_unit:
+      selector:
+        select:
+          options:
+          - c
+          - f
+          translation_key: temperature_unit
+    start:
+      selector:
+        datetime: {}
+    end:
+      selector:
+        datetime: {}
+    note:
+      selector:
+        text: {}
+log_activity:
+  fields:
+    device_id:
+      selector:
+        device:
+          integration: nestling
+    child:
+      selector:
+        text: {}
+    kind:
+      required: true
+      selector:
+        text: {}
+    start:
+      selector:
+        datetime: {}
+    end:
+      selector:
+        datetime: {}
+    note:
+      selector:
+        text: {}
+log_note:
+  fields:
+    device_id:
+      selector:
+        device:
+          integration: nestling
+    child:
+      selector:
+        text: {}
+    note:
+      required: true
+      selector:
+        text: {}
+    start:
+      selector:
+        datetime: {}
+start_timer:
+  fields:
+    device_id:
+      selector:
+        device:
+          integration: nestling
+    child:
+      selector:
+        text: {}
+    kind:
+      required: true
+      selector:
+        select:
+          options:
+          - breastfeed
+          - pump
+          - sleep
+          translation_key: timer_kind
+    side:
+      selector:
+        select:
+          options:
+          - left
+          - right
+          - both
+          translation_key: side
+    start:
+      selector:
+        datetime: {}
+switch_side:
+  fields:
+    device_id:
+      selector:
+        device:
+          integration: nestling
+    child:
+      selector:
+        text: {}
+    kind:
+      selector:
+        select:
+          options:
+          - breastfeed
+          - pump
+          translation_key: timer_kind
+    side:
+      selector:
+        select:
+          options:
+          - left
+          - right
+          - both
+          translation_key: side
+pause_timer:
+  fields:
+    device_id:
+      selector:
+        device:
+          integration: nestling
+    child:
+      selector:
+        text: {}
+    kind:
+      required: true
+      selector:
+        select:
+          options:
+          - breastfeed
+          - pump
+          - sleep
+          translation_key: timer_kind
+resume_timer:
+  fields:
+    device_id:
+      selector:
+        device:
+          integration: nestling
+    child:
+      selector:
+        text: {}
+    kind:
+      required: true
+      selector:
+        select:
+          options:
+          - breastfeed
+          - pump
+          - sleep
+          translation_key: timer_kind
+    side:
+      selector:
+        select:
+          options:
+          - left
+          - right
+          - both
+          translation_key: side
+adjust_timer:
+  fields:
+    device_id:
+      selector:
+        device:
+          integration: nestling
+    child:
+      selector:
+        text: {}
+    kind:
+      required: true
+      selector:
+        select:
+          options:
+          - breastfeed
+          - pump
+          - sleep
+          translation_key: timer_kind
+    start:
+      selector:
+        datetime: {}
+    left_minutes:
+      selector:
+        number:
+          min: 0
+          max: 1440
+          step: 0.5
+          mode: box
+          unit_of_measurement: min
+    right_minutes:
+      selector:
+        number:
+          min: 0
+          max: 1440
+          step: 0.5
+          mode: box
+          unit_of_measurement: min
+    minutes:
+      selector:
+        number:
+          min: 0
+          max: 1440
+          step: 0.5
+          mode: box
+          unit_of_measurement: min
+stop_timer:
+  fields:
+    device_id:
+      selector:
+        device:
+          integration: nestling
+    child:
+      selector:
+        text: {}
+    kind:
+      required: true
+      selector:
+        select:
+          options:
+          - breastfeed
+          - pump
+          - sleep
+          translation_key: timer_kind
+    end:
+      selector:
+        datetime: {}
+    note:
+      selector:
+        text: {}
+    left_amount:
+      selector:
+        number:
+          min: 0
+          max: 2000
+          step: 0.1
+          mode: box
+    right_amount:
+      selector:
+        number:
+          min: 0
+          max: 2000
+          step: 0.1
+          mode: box
+    volume_unit:
+      selector:
+        select:
+          options:
+          - ml
+          - oz
+          translation_key: volume_unit
+    location:
+      selector:
+        text: {}
+discard_timer:
+  fields:
+    device_id:
+      selector:
+        device:
+          integration: nestling
+    child:
+      selector:
+        text: {}
+    kind:
+      required: true
+      selector:
+        select:
+          options:
+          - breastfeed
+          - pump
+          - sleep
+          translation_key: timer_kind
+continue_last:
+  fields:
+    device_id:
+      selector:
+        device:
+          integration: nestling
+    child:
+      selector:
+        text: {}
+    kind:
+      required: true
+      selector:
+        select:
+          options:
+          - breastfeed
+          - pump
+          - sleep
+          translation_key: timer_kind
+    side:
+      selector:
+        select:
+          options:
+          - left
+          - right
+          - both
+          translation_key: side

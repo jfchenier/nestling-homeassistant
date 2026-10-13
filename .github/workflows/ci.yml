@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  hassfest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: home-assistant/actions/hassfest@master
+
+  hacs:
+    # HACS reads the files the way it installs them, without a token: only a public repository works.
+    if: ${{ !github.event.repository.private }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: hacs/action@main
+        with:
+          category: integration
+          # Not in home-assistant/brands; description and topics come with the public repository.
+          ignore: brands description topics
+
+  tests:
+    runs-on: ubuntu-latest
+    env:
+      # The Nestling server the tests run against, built from source.
+      NESTLING_REF: main
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/checkout@v4
+        with:
+          repository: jfchenier/nestling
+          ref: ${{ env.NESTLING_REF }}
+          path: nestling-server
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: nestling-server
+      - run: cargo build --release --manifest-path nestling-server/Cargo.toml
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: requirements_test.txt
+      - run: pip install -r requirements_test.txt
+      - run: ruff check . && ruff format --check .
+      - run: pytest -q
+        env:
+          NESTLING_BIN: nestling-server/target/release/nestling
