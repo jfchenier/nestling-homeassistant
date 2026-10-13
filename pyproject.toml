@@ -1,0 +1,13 @@
+[tool.ruff]
+line-length = 140
+target-version = "py313"
+extend-exclude = ["nestling-server"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM", "RUF"]
+ignore = ["RUF012"]
+
+[tool.ruff.lint.isort]
+force-sort-within-sections = true
+known-first-party = ["custom_components"]
+combine-as-imports = true
